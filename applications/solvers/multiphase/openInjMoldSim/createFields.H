@@ -255,8 +255,8 @@ dimensionedScalar zuPref("zuPref", dimensionSet(1,-1,-2,0,0,0,0), 1e5); //Pa
 dimensionedScalar zuBeta("zuBeta", dimensionSet(0,0,0,2,0,0,0), 1126.9); //K2
 
 //Nucleation - params
-dimensionedScalar zuN1("zuN1", dimensionSet(0,0,-3,-1,0,0,0), -2.6087e13); //K^-1 m^-3
-dimensionedScalar zuN2("zuN2", dimensionSet(0,0,-3,0,0,0,0), 6.5783e15); //m^-3
+dimensionedScalar zuN1("zuN1", dimensionSet(0,-3,0,-1,0,0,0), -2.6087e13); //K^-1 m^-3
+dimensionedScalar zuN2("zuN2", dimensionSet(0,-3,0,0,0,0,0), 6.5783e15); //m^-3
 
 //Crystallization state fields
 volScalarField zuFi2
