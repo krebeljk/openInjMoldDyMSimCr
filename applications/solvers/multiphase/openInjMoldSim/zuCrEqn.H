@@ -25,5 +25,23 @@
     zuFi2eq.relax();
     zuFi2eq.solve();
 
-    //Info<< "min(T) " << min(T).value() << endl;
+    fvScalarMatrix zuFi1eq
+    (
+        fvm::ddt(zuFi1)
+      + fvm::div(phi, zuFi1)
+      - zuFi2 * zuGro
+    );
+
+    zuFi1eq.relax();
+    zuFi1eq.solve();
+
+    fvScalarMatrix zuFi0eq
+    (
+        fvm::ddt(zuFi0)
+      + fvm::div(phi, zuFi0)
+      - zuFi1 * zuGro
+    );
+
+    zuFi0eq.relax();
+    zuFi0eq.solve();
 }
