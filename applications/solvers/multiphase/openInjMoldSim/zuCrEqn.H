@@ -1,6 +1,6 @@
 {
 
-    volScalarField zuNuc
+    volScalarField zuGro
     (
        zuGmax * 
        exp( -2.0 *
@@ -8,6 +8,10 @@
               T - zuTref - zua * (p - zuPref)
            )/zuBeta
        ) 
+    );
+    volScalarField zuNuc
+    (
+        zuN1 * (T - twoSevenThree) + zuN2
     );
 
     //fvScalarMatrix TEqn
