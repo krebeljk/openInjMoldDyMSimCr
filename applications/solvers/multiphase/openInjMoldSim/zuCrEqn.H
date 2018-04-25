@@ -14,24 +14,16 @@
         zuN1 * (T - twoSevenThree) + zuN2
     );
 
-    //fvScalarMatrix TEqn
-    //(
-    //    fvm::ddt(rho, T)
-    //  + fvm::div(rhoPhi, T)
-    //  - 1.0/mixture.Cp()*fvm::laplacian(mixture.kappa(), T)
-    //  - mixture.mu() * pow(strig,2)/mixture.Cp()//viscous heating
-    //  - T * mixture.cTExp()
-    //    * (
-    //        fvc::ddt(p)
-    //      + fvc::div(phi, p)
-    //      )// Dp/Dt
-    //      /mixture.Cp()
-    //);
+    fvScalarMatrix zuFi2eq
+    (
+        fvm::ddt(zuFi2)
+      + fvm::div(phi, zuFi2)
+      - 8.0 * constant::mathematical::pi
+        * zuGro * zuNuc
+    );
 
-    //TEqn.relax();
-    //TEqn.solve();
-
-    //mixture.correct();
+    zuFi2eq.relax();
+    zuFi2eq.solve();
 
     //Info<< "min(T) " << min(T).value() << endl;
 }
