@@ -45,6 +45,7 @@ License
 #include "sutherlandTransport.H"
 #include "polymerPVT.H"
 #include "taitHCR.H"
+#include "taitCr.H"
 #include "crossWLFTransport.H"
 #include "crossWLFTransportTTC.H"
 
@@ -56,6 +57,7 @@ License
 
 #include "heRhoThermo.H"
 #include "mojHeRhoThermo.H"
+#include "mojCrHeRhoThermo.H"
 #include "pureMixture.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
@@ -219,6 +221,18 @@ mojMakeThermo
     sensibleInternalEnergy,
     hTabularThermo,//new
     taitHCR,
+    specie
+);
+
+mojMakeThermo
+(
+    mojRhoThermo,
+    mojCrHeRhoThermo,//new
+    pureMixture,
+    crossWLFTransportTTC,
+    sensibleInternalEnergy,
+    hTabularThermo,
+    taitCr,//new
     specie
 );
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
