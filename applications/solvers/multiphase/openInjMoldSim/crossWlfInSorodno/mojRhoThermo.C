@@ -93,7 +93,7 @@ Foam::mojRhoThermo::mojRhoThermo(const fvMesh& mesh, const word& phaseName)
             IOobject::NO_WRITE
         ),
         mesh,
-        dimensionSet(0, 0, 0, 0, 0)
+        dimensionedScalar("thermo:initcr", dimensionSet(0,0,0,0,0,0,0), 0.0)
     )
 
 {}
@@ -161,7 +161,7 @@ Foam::mojRhoThermo::mojRhoThermo
             IOobject::NO_WRITE
         ),
         mesh,
-        dimensionSet(0, 0, 0, 0, 0)
+        dimensionedScalar("thermo:initcr", dimensionSet(0,0,0,0,0,0,0), 0.0)
     )
 {}
 
