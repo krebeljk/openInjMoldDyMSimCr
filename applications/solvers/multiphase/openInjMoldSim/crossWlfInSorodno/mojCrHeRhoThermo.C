@@ -39,6 +39,7 @@ void Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::calculate()
     scalarField& rhoCells = this->rho_.internalField();
     scalarField& muCells = this->mu_.internalField();
     scalarField& alphaCells = this->alpha_.internalField();
+    scalarField& crCells = this->cr_.internalField();
 
     forAll(TCells, celli)
     {
@@ -53,7 +54,7 @@ void Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::calculate()
         //);
 
         psiCells[celli] = mixture_.psi(pCells[celli], TCells[celli]);
-        rhoCells[celli] = mixture_.rho(pCells[celli], TCells[celli]);
+        rhoCells[celli] = mixture_.rho(pCells[celli], TCells[celli], crCells[celli]);
 
         muCells[celli] = mixture_.mu(pCells[celli], TCells[celli], strigCells[celli]);
 
@@ -64,8 +65,9 @@ void Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::calculate()
     {
         fvPatchScalarField& pp = this->p_.boundaryField()[patchi];
         fvPatchScalarField& pT = this->T_.boundaryField()[patchi];
-	fvPatchScalarField& pstrig = this->strig_.boundaryField()[patchi];
-	//fvPatchScalarField& pU = strig.boundaryField()[patchi]; // tukaj boundary
+        fvPatchScalarField& pstrig = this->strig_.boundaryField()[patchi];
+        fvPatchScalarField& pcr = this->cr_.boundaryField()[patchi];
+        //fvPatchScalarField& pU = strig.boundaryField()[patchi]; // tukaj boundary
 
         fvPatchScalarField& ppsi = this->psi_.boundaryField()[patchi];
         fvPatchScalarField& prho = this->rho_.boundaryField()[patchi];
@@ -87,7 +89,7 @@ void Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::calculate()
 
 
                 ppsi[facei] = mixture_.psi(pp[facei], pT[facei]);
-                prho[facei] = mixture_.rho(pp[facei], pT[facei]);
+                prho[facei] = mixture_.rho(pp[facei], pT[facei], pcr[facei]);
                 pmu[facei] = mixture_.mu(pp[facei], pT[facei], pstrig[facei]);
                 palpha[facei] = mixture_.alphah(pp[facei], pT[facei]);
             }
@@ -102,7 +104,7 @@ void Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::calculate()
                 //pT[facei] = mixture_.THE(ph[facei], pp[facei], pT[facei]);//Kristjan: governed by TEqn
 
                 ppsi[facei] = mixture_.psi(pp[facei], pT[facei]);
-                prho[facei] = mixture_.rho(pp[facei], pT[facei]);
+                prho[facei] = mixture_.rho(pp[facei], pT[facei], pcr[facei]);
                 pmu[facei] = mixture_.mu(pp[facei], pT[facei], pstrig[facei]);
                 palpha[facei] = mixture_.alphah(pp[facei], pT[facei]);
             }
