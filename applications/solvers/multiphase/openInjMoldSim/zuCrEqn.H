@@ -23,7 +23,8 @@
       + fvm::div(phi, zuFi2)
       - 8.0 * constant::mathematical::pi
         * zuGro * zuNuc
-        * pos(0.9999 - zuCr)
+        * pos(0.9999 - zuCr) //stop at cr=1
+        * pos(alpha1 - 0.9) //only for poly
     );
 
     zuFi2eq.relax();
@@ -35,7 +36,8 @@
         fvm::ddt(zuFi1)
       + fvm::div(phi, zuFi1)
       - zuFi2 * zuGro
-        * pos(0.9999 - zuCr)
+        * pos(0.9999 - zuCr) //stop at cr=1
+        * pos(alpha1 - 0.9) //only for poly
     );
 
     zuFi1eq.relax();
@@ -47,7 +49,8 @@
         fvm::ddt(zuFi0)
       + fvm::div(phi, zuFi0)
       - zuFi1 * zuGro
-        * pos(0.9999 - zuCr)
+        * pos(0.9999 - zuCr) //stop at cr=1
+        * pos(alpha1 - 0.9) //only for poly
     );
 
     zuFi0eq.relax();
