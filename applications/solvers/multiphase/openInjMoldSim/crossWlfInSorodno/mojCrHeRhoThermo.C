@@ -53,7 +53,7 @@ void Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::calculate()
         //    TCells[celli]
         //);
 
-        psiCells[celli] = mixture_.psi(pCells[celli], TCells[celli]);
+        psiCells[celli] = mixture_.psi(pCells[celli], TCells[celli], crCells[celli]);
         rhoCells[celli] = mixture_.rho(pCells[celli], TCells[celli], crCells[celli]);
 
         muCells[celli] = mixture_.mu(pCells[celli], TCells[celli], strigCells[celli]);
@@ -88,7 +88,7 @@ void Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::calculate()
                 //ph[facei] = mixture_.HE(pp[facei], pT[facei]);//Kristjan: governed by TEqn
 
 
-                ppsi[facei] = mixture_.psi(pp[facei], pT[facei]);
+                ppsi[facei] = mixture_.psi(pp[facei], pT[facei], pcr[facei]);
                 prho[facei] = mixture_.rho(pp[facei], pT[facei], pcr[facei]);
                 pmu[facei] = mixture_.mu(pp[facei], pT[facei], pstrig[facei]);
                 palpha[facei] = mixture_.alphah(pp[facei], pT[facei]);
@@ -103,7 +103,7 @@ void Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::calculate()
 
                 //pT[facei] = mixture_.THE(ph[facei], pp[facei], pT[facei]);//Kristjan: governed by TEqn
 
-                ppsi[facei] = mixture_.psi(pp[facei], pT[facei]);
+                ppsi[facei] = mixture_.psi(pp[facei], pT[facei], pcr[facei]);
                 prho[facei] = mixture_.rho(pp[facei], pT[facei], pcr[facei]);
                 pmu[facei] = mixture_.mu(pp[facei], pT[facei], pstrig[facei]);
                 palpha[facei] = mixture_.alphah(pp[facei], pT[facei]);
