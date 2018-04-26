@@ -56,6 +56,7 @@ License
 
 #include "heRhoThermo.H"
 #include "mojHeRhoThermo.H"
+#include "mojCrHeRhoThermo.H"
 #include "pureMixture.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
@@ -218,6 +219,18 @@ mojMakeThermo
     crossWLFTransportTTC,//new
     sensibleInternalEnergy,
     hTabularThermo,//new
+    taitHCR,
+    specie
+);
+
+mojMakeThermo
+(
+    mojRhoThermo,
+    mojCrHeRhoThermo,//new
+    pureMixture,
+    crossWLFTransportTTC,
+    sensibleInternalEnergy,
+    hTabularThermo,
     taitHCR,
     specie
 );
