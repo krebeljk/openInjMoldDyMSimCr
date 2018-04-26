@@ -24,13 +24,13 @@ License
 
 \*---------------------------------------------------------------------------*/
 
-#include "taitHCR.H"
+#include "taitCr.H"
 #include "specie.H"
 
 // * * * * * * * * * * * * * Private Member Functions  * * * * * * * * * * * //
 
 template<class Specie>
-inline Foam::taitHCR<Specie>::taitHCR
+inline Foam::taitCr<Specie>::taitCr
 (
     const Specie& sp,
     const scalar b1m,
@@ -64,10 +64,10 @@ inline Foam::taitHCR<Specie>::taitHCR
 // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
 
 template<class Specie>
-inline Foam::taitHCR<Specie>::taitHCR
+inline Foam::taitCr<Specie>::taitCr
 (
     const word& name,
-    const taitHCR<Specie>& pf
+    const taitCr<Specie>& pf
 )
 :
     Specie(name, pf),
@@ -86,45 +86,45 @@ inline Foam::taitHCR<Specie>::taitHCR
 
 
 template<class Specie>
-inline Foam::autoPtr<Foam::taitHCR<Specie> >
-Foam::taitHCR<Specie>::clone() const
+inline Foam::autoPtr<Foam::taitCr<Specie> >
+Foam::taitCr<Specie>::clone() const
 {
-    return autoPtr<taitHCR<Specie> >(new taitHCR<Specie>(*this));
+    return autoPtr<taitCr<Specie> >(new taitCr<Specie>(*this));
 }
 
 
 template<class Specie>
-inline Foam::autoPtr<Foam::taitHCR<Specie> >
-Foam::taitHCR<Specie>::New(Istream& is)
+inline Foam::autoPtr<Foam::taitCr<Specie> >
+Foam::taitCr<Specie>::New(Istream& is)
 {
-    return autoPtr<taitHCR<Specie> >(new taitHCR<Specie>(is));
+    return autoPtr<taitCr<Specie> >(new taitCr<Specie>(is));
 }
 
 
 template<class Specie>
-inline Foam::autoPtr<Foam::taitHCR<Specie> >
-Foam::taitHCR<Specie>::New
+inline Foam::autoPtr<Foam::taitCr<Specie> >
+Foam::taitCr<Specie>::New
 (
     const dictionary& dict
 )
 {
-    return autoPtr<taitHCR<Specie> >(new taitHCR<Specie>(dict));
+    return autoPtr<taitCr<Specie> >(new taitCr<Specie>(dict));
 }
 
 
 // * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
 
 template<class Specie>
-inline Foam::scalar Foam::taitHCR<Specie>::R() const
+inline Foam::scalar Foam::taitCr<Specie>::R() const
 {
-        Info << "POZOR: klic R() v taitHCRI.H" << endl; // ce se to pjavi v izpisu simulacije bo treba preveriti, kaj so posledice te funkcije
+        Info << "POZOR: klic R() v taitCrI.H" << endl; // ce se to pjavi v izpisu simulacije bo treba preveriti, kaj so posledice te funkcije
     //return R_;
     return 1;
 }
 
 
 template<class Specie>
-inline Foam::scalar Foam::taitHCR<Specie>::rho(scalar p, scalar T) const // mathematica export fim_01_01_E_04_02
+inline Foam::scalar Foam::taitCr<Specie>::rho(scalar p, scalar T) const // mathematica export fim_01_01_E_04_02
 {
     scalar spec_volS;
     scalar spec_volM;
@@ -145,7 +145,7 @@ inline Foam::scalar Foam::taitHCR<Specie>::rho(scalar p, scalar T) const // math
 }
 
 template<class Specie>
-inline Foam::scalar Foam::taitHCR<Specie>::cTExp(scalar p, scalar T) const // num. der.
+inline Foam::scalar Foam::taitCr<Specie>::cTExp(scalar p, scalar T) const // num. der.
 {
     scalar spec_volS;
     scalar spec_volSp;
@@ -177,9 +177,9 @@ inline Foam::scalar Foam::taitHCR<Specie>::cTExp(scalar p, scalar T) const // nu
 
 
 template<class Specie>
-inline Foam::scalar Foam::taitHCR<Specie>::s(scalar p, scalar T) const // POZOR - NI TESTIRANO
+inline Foam::scalar Foam::taitCr<Specie>::s(scalar p, scalar T) const // POZOR - NI TESTIRANO
 {
-    notImplemented("Foam::taitHCR<Specie>::s");//kristjan
+    notImplemented("Foam::taitCr<Specie>::s");//kristjan
 
     return 0.0;
 }
@@ -188,7 +188,7 @@ inline Foam::scalar Foam::taitHCR<Specie>::s(scalar p, scalar T) const // POZOR 
 // B (b3m_*exp(-b4m_*(T-b5_)))
  
 template<class Specie>
-inline Foam::scalar Foam::taitHCR<Specie>::psi(scalar p, scalar T) const // mathematica export fim_01_01_I_00_02_psiMush_01.txt
+inline Foam::scalar Foam::taitCr<Specie>::psi(scalar p, scalar T) const // mathematica export fim_01_01_I_00_02_psiMush_01.txt
 {
     if (p < scalar(10.0)) //majhen tlak
     {
@@ -218,15 +218,15 @@ inline Foam::scalar Foam::taitHCR<Specie>::psi(scalar p, scalar T) const // math
 
 
 template<class Specie>
-inline Foam::scalar Foam::taitHCR<Specie>::Z(scalar p, scalar T) const
+inline Foam::scalar Foam::taitCr<Specie>::Z(scalar p, scalar T) const
 {
-    Info << "POZOR: Z(p, T) v taitHCRI.H" << endl; // ce se to pjavi v izpisu simulacije bo treba preveriti, kaj so posledice te funkcije
+    Info << "POZOR: Z(p, T) v taitCrI.H" << endl; // ce se to pjavi v izpisu simulacije bo treba preveriti, kaj so posledice te funkcije
     return 1;
 }
 
 
 template<class Specie>
-inline Foam::scalar Foam::taitHCR<Specie>::cpMcv(scalar p, scalar T) const //fim_01_01_I_00_02_cpMcv_01 - MMA generated
+inline Foam::scalar Foam::taitCr<Specie>::cpMcv(scalar p, scalar T) const //fim_01_01_I_00_02_cpMcv_01 - MMA generated
 {
     scalar cpmcvMy;
     scalar cpmcvMol;
@@ -253,7 +253,7 @@ inline Foam::scalar Foam::taitHCR<Specie>::cpMcv(scalar p, scalar T) const //fim
 }
 
 template<class Specie>
-inline Foam::scalar Foam::taitHCR<Specie>::interpolation(scalar vS ,scalar vM ,scalar p ,scalar T) const
+inline Foam::scalar Foam::taitCr<Specie>::interpolation(scalar vS ,scalar vM ,scalar p ,scalar T) const
 {
     scalar Td = b10_; //[K] crystallization range
     scalar T0 = b5_ + b6_*p; //Tait solidification temperature
@@ -278,9 +278,9 @@ inline Foam::scalar Foam::taitHCR<Specie>::interpolation(scalar vS ,scalar vM ,s
 // * * * * * * * * * * * * * * * Member Operators  * * * * * * * * * * * * * //
 /*
 template<class Specie>
-inline void Foam::taitHCR<Specie>::operator+=
+inline void Foam::taitCr<Specie>::operator+=
 (
-    const taitHCR<Specie>& pf
+    const taitCr<Specie>& pf
 )
 {
     scalar molr1 = this->nMoles();
@@ -296,9 +296,9 @@ inline void Foam::taitHCR<Specie>::operator+=
 
 
 template<class Specie>
-inline void Foam::taitHCR<Specie>::operator-=
+inline void Foam::taitCr<Specie>::operator-=
 (
-    const taitHCR<Specie>& pf
+    const taitCr<Specie>& pf
 )
 {
     scalar molr1 = this->nMoles();
@@ -314,7 +314,7 @@ inline void Foam::taitHCR<Specie>::operator-=
 
 
 template<class Specie>
-inline void Foam::taitHCR<Specie>::operator*=(const scalar s)
+inline void Foam::taitCr<Specie>::operator*=(const scalar s)
 {
     Specie::operator*=(s);
 }
@@ -323,17 +323,17 @@ inline void Foam::taitHCR<Specie>::operator*=(const scalar s)
 // * * * * * * * * * * * * * * * Friend Operators  * * * * * * * * * * * * * //
 
 template<class Specie>
-inline Foam::taitHCR<Specie> Foam::operator+
+inline Foam::taitCr<Specie> Foam::operator+
 (
-    const taitHCR<Specie>& pf1,
-    const taitHCR<Specie>& pf2
+    const taitCr<Specie>& pf1,
+    const taitCr<Specie>& pf2
 )
 {
     scalar nMoles = pf1.nMoles() + pf2.nMoles();
     scalar molr1 = pf1.nMoles()/nMoles;
     scalar molr2 = pf2.nMoles()/nMoles;
 
-    return taitHCR<Specie>
+    return taitCr<Specie>
     (
         static_cast<const Specie&>(pf1)
       + static_cast<const Specie&>(pf2),
@@ -344,17 +344,17 @@ inline Foam::taitHCR<Specie> Foam::operator+
 
 
 template<class Specie>
-inline Foam::taitHCR<Specie> Foam::operator-
+inline Foam::taitCr<Specie> Foam::operator-
 (
-    const taitHCR<Specie>& pf1,
-    const taitHCR<Specie>& pf2
+    const taitCr<Specie>& pf1,
+    const taitCr<Specie>& pf2
 )
 {
     scalar nMoles = pf1.nMoles() + pf2.nMoles();
     scalar molr1 = pf1.nMoles()/nMoles;
     scalar molr2 = pf2.nMoles()/nMoles;
 
-    return taitHCR<Specie>
+    return taitCr<Specie>
     (
         static_cast<const Specie&>(pf1)
       - static_cast<const Specie&>(pf2),
@@ -365,13 +365,13 @@ inline Foam::taitHCR<Specie> Foam::operator-
 
 
 template<class Specie>
-inline Foam::taitHCR<Specie> Foam::operator*
+inline Foam::taitCr<Specie> Foam::operator*
 (
     const scalar s,
-    const taitHCR<Specie>& pf
+    const taitCr<Specie>& pf
 )
 {
-    return taitHCR<Specie>
+    return taitCr<Specie>
     (
         s*static_cast<const Specie&>(pf),
         pf.R_,
@@ -381,10 +381,10 @@ inline Foam::taitHCR<Specie> Foam::operator*
 
 
 template<class Specie>
-inline Foam::taitHCR<Specie> Foam::operator==
+inline Foam::taitCr<Specie> Foam::operator==
 (
-    const taitHCR<Specie>& pf1,
-    const taitHCR<Specie>& pf2
+    const taitCr<Specie>& pf1,
+    const taitCr<Specie>& pf2
 )
 {
     return pf2 - pf1;
