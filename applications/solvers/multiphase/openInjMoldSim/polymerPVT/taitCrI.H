@@ -230,6 +230,17 @@ inline Foam::scalar Foam::taitCr<Specie>::psi(scalar p, scalar T) const // mathe
     return psiRet;
 }
 
+template<class Specie>
+inline Foam::scalar Foam::taitCr<Specie>::psi(scalar p, scalar T, scalar cr) const
+{
+    if (p < scalar(10.0)) //majhen tlak
+    {
+        Info << "Pozor! Majhen tlak, nevarnost deljenja z 0 v enacbi stanja, funkcija psi. p=" << p << " Pa" << endl;
+    }
+    scalar dp;
+
+    return -(rho(p+dp, T, cr) - rho(p-dp, T, cr))/(2.0*dp * rho(p, T, cr));
+}
 
 template<class Specie>
 inline Foam::scalar Foam::taitCr<Specie>::Z(scalar p, scalar T) const

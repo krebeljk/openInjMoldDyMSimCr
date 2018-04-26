@@ -181,6 +181,9 @@ public:
             //- Return compressibility rho/p [s^2/m^2]
             inline scalar psi(scalar p, scalar T) const;
 
+            //- Return compressibility rho/p [s^2/m^2]
+            inline scalar psi(scalar p, scalar T, scalar cr) const;
+
             //- Return compression factor []
             inline scalar Z(scalar p, scalar T) const;
 
