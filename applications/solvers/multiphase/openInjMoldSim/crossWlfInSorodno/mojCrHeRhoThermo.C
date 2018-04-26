@@ -157,7 +157,7 @@ void Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::correct()
 template<class BasicPsiThermo, class MixtureType>
 Foam::tmp<Foam::scalarField> Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::Cp
 (
-    const scalarField& p,
+    const scalarField& cr,
     const scalarField& T,
     const label patchi
 ) const
@@ -168,7 +168,7 @@ Foam::tmp<Foam::scalarField> Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>
     forAll(T, facei)
     {
         cp[facei] =
-            this->patchFaceMixture(patchi, facei).Cp(p[facei], T[facei]);
+            this->patchFaceMixture(patchi, facei).Cp(cr[facei], T[facei]);
     }
 
     return tCp;
@@ -204,19 +204,19 @@ Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::Cp() const
     forAll(this->T_, celli)
     {
         cp[celli] =
-            this->cellMixture(celli).Cp(this->p_[celli], this->T_[celli]);
+            this->cellMixture(celli).Cp(this->cr_[celli], this->T_[celli]);
     }
 
     forAll(this->T_.boundaryField(), patchi)
     {
-        const fvPatchScalarField& pp = this->p_.boundaryField()[patchi];
+        const fvPatchScalarField& pcr = this->cr_.boundaryField()[patchi];
         const fvPatchScalarField& pT = this->T_.boundaryField()[patchi];
         fvPatchScalarField& pCp = cp.boundaryField()[patchi];
 
         forAll(pT, facei)
         {
             pCp[facei] =
-                this->patchFaceMixture(patchi, facei).Cp(pp[facei], pT[facei]);
+                this->patchFaceMixture(patchi, facei).Cp(pcr[facei], pT[facei]);
         }
     }
 
