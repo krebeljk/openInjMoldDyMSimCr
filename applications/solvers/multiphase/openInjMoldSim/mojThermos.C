@@ -53,6 +53,7 @@ License
 #include "hPolynomialThermo.H"
 #include "polynomialTransport.H"
 #include "hTabularThermo.H"
+#include "hTabularCrThermo.H"
 
 
 #include "heRhoThermo.H"
@@ -231,7 +232,7 @@ mojMakeThermo
     pureMixture,
     crossWLFTransportTTC,
     sensibleInternalEnergy,
-    hTabularThermo,
+    hTabularCrThermo,
     taitCr,//new
     specie
 );
