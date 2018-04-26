@@ -239,7 +239,7 @@ inline Foam::scalar Foam::taitCr<Specie>::psi(scalar p, scalar T, scalar cr) con
     }
     scalar dp = 2000.0; // Pa
 
-    return -(rho(p+dp, T, cr) - rho(p-dp, T, cr))/(2.0*dp * rho(p, T, cr));
+    return (rho(p+dp, T, cr) - rho(p-dp, T, cr))/(2.0*dp);
 }
 
 template<class Specie>
