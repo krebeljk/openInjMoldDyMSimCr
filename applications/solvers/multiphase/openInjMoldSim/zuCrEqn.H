@@ -58,5 +58,6 @@
 
     // zuCr
     zuCr = 1 - exp(-zuFi0);
+    crPoly = zuCr; //transfer crystallinity to thermo
 
 }
