@@ -38,7 +38,7 @@ Foam::hTabularCrThermo<EquationOfState>::hTabularCrThermo
     Hf_(readScalar(is))
 {
     Hf_ *= this->W();
-    cpTable = interpolation2DTable<scalar>("constant/cpTable");
+    cpTable = interpolation2DTable<scalar>("constant/cpTableCr");
     //hTable = interpolation2DTable<scalar>("constant/hTable");
     cpTable.outOfBounds(interpolation2DTable<scalar>::CLAMP);
     //hTable.outOfBounds(interpolation2DTable<scalar>::CLAMP);
@@ -65,7 +65,7 @@ Foam::hTabularCrThermo<EquationOfState>::hTabularCrThermo
     Hf_(readScalar(dict.subDict("thermodynamics").lookup("Hf")))
 {
     Hf_ *= this->W();
-    cpTable = interpolation2DTable<scalar>("constant/cpTable");
+    cpTable = interpolation2DTable<scalar>("constant/cpTableCr");
     //hTable = interpolation2DTable<scalar>("constant/hTable");
     cpTable.outOfBounds(interpolation2DTable<scalar>::CLAMP);
     //hTable.outOfBounds(interpolation2DTable<scalar>::CLAMP);

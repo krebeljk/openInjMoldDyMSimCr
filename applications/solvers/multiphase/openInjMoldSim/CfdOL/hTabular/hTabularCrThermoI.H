@@ -37,7 +37,7 @@ inline Foam::hTabularCrThermo<EquationOfState>::hTabularCrThermo
     EquationOfState(pt),
     Hf_(Hf)
 {
-    cpTable = interpolation2DTable<scalar>("constant/cpTable");
+    cpTable = interpolation2DTable<scalar>("constant/cpTableCr");
     //hTable = interpolation2DTable<scalar>("constant/hTable");
     cpTable.outOfBounds(interpolation2DTable<scalar>::CLAMP);
     //hTable.outOfBounds(interpolation2DTable<scalar>::CLAMP);
@@ -55,7 +55,7 @@ inline Foam::hTabularCrThermo<EquationOfState>::hTabularCrThermo
     EquationOfState(pt),
     Hf_(pt.Hf_)
 {
-    cpTable = interpolation2DTable<scalar>("constant/cpTable");
+    cpTable = interpolation2DTable<scalar>("constant/cpTableCr");
     //hTable = interpolation2DTable<scalar>("constant/hTable");
     cpTable.outOfBounds(interpolation2DTable<scalar>::CLAMP);
     //hTable.outOfBounds(interpolation2DTable<scalar>::CLAMP);
@@ -72,7 +72,7 @@ inline Foam::hTabularCrThermo<EquationOfState>::hTabularCrThermo
     EquationOfState(name, pt),
     Hf_(pt.Hf_)
 {
-    cpTable = interpolation2DTable<scalar>("constant/cpTable");
+    cpTable = interpolation2DTable<scalar>("constant/cpTableCr");
     //hTable = interpolation2DTable<scalar>("constant/hTable");
     cpTable.outOfBounds(interpolation2DTable<scalar>::CLAMP);
     //hTable.outOfBounds(interpolation2DTable<scalar>::CLAMP);
