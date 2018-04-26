@@ -23,12 +23,12 @@ License
 
 \*---------------------------------------------------------------------------*/
 
-#include "hTabularThermo.H"
+#include "hTabularCrThermo.H"
 
 // * * * * * * * * * * * * * Private Member Functions  * * * * * * * * * * * //
 
 template<class EquationOfState>
-inline Foam::hTabularThermo<EquationOfState>::hTabularThermo
+inline Foam::hTabularCrThermo<EquationOfState>::hTabularCrThermo
 (
     const EquationOfState& pt,
     const scalar Hf
@@ -47,9 +47,9 @@ inline Foam::hTabularThermo<EquationOfState>::hTabularThermo
 // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
 
 template<class EquationOfState>
-inline Foam::hTabularThermo<EquationOfState>::hTabularThermo
+inline Foam::hTabularCrThermo<EquationOfState>::hTabularCrThermo
 (
-    const hTabularThermo& pt
+    const hTabularCrThermo& pt
 )
 :
     EquationOfState(pt),
@@ -63,10 +63,10 @@ inline Foam::hTabularThermo<EquationOfState>::hTabularThermo
 
 
 template<class EquationOfState>
-inline Foam::hTabularThermo<EquationOfState>::hTabularThermo
+inline Foam::hTabularCrThermo<EquationOfState>::hTabularCrThermo
 (
     const word& name,
-    const hTabularThermo& pt
+    const hTabularCrThermo& pt
 )
 :
     EquationOfState(name, pt),
@@ -82,7 +82,7 @@ inline Foam::hTabularThermo<EquationOfState>::hTabularThermo
 // * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
 
 template<class EquationOfState>
-inline Foam::scalar Foam::hTabularThermo<EquationOfState>::limit
+inline Foam::scalar Foam::hTabularCrThermo<EquationOfState>::limit
 (
     const scalar T
 ) const
@@ -92,7 +92,7 @@ inline Foam::scalar Foam::hTabularThermo<EquationOfState>::limit
 
 
 template<class EquationOfState>
-inline Foam::scalar Foam::hTabularThermo<EquationOfState>::cp
+inline Foam::scalar Foam::hTabularCrThermo<EquationOfState>::cp
 (
     const scalar p, const scalar T
 ) const
@@ -103,7 +103,7 @@ inline Foam::scalar Foam::hTabularThermo<EquationOfState>::cp
 
 
 template<class EquationOfState>
-inline Foam::scalar Foam::hTabularThermo<EquationOfState>::ha
+inline Foam::scalar Foam::hTabularCrThermo<EquationOfState>::ha
 (
     const scalar p, const scalar T
 ) const
@@ -115,7 +115,7 @@ inline Foam::scalar Foam::hTabularThermo<EquationOfState>::ha
 
 
 template<class EquationOfState>
-inline Foam::scalar Foam::hTabularThermo<EquationOfState>::hs
+inline Foam::scalar Foam::hTabularCrThermo<EquationOfState>::hs
 (
     const scalar p, const scalar T
 ) const
@@ -128,21 +128,21 @@ inline Foam::scalar Foam::hTabularThermo<EquationOfState>::hs
 
 
 template<class EquationOfState>
-inline Foam::scalar Foam::hTabularThermo<EquationOfState>::hc()
+inline Foam::scalar Foam::hTabularCrThermo<EquationOfState>::hc()
 const
 {
     return Hf_;
 }
 
 template<class EquationOfState>
-inline Foam::scalar Foam::hTabularThermo<EquationOfState>::s
+inline Foam::scalar Foam::hTabularCrThermo<EquationOfState>::s
 (
     const scalar p, const scalar T
 ) const
 {
     notImplemented
     (
-        "scalar hTabularThermo<EquationOfState>::"
+        "scalar hTabularCrThermo<EquationOfState>::"
         "s(const scalar p, const scalar T) const"
     );
     return T;
@@ -151,10 +151,10 @@ inline Foam::scalar Foam::hTabularThermo<EquationOfState>::s
 // * * * * * * * * * * * * * * * Member Operators  * * * * * * * * * * * * * //
 
 template<class EquationOfState>
-inline Foam::hTabularThermo<EquationOfState>&
-Foam::hTabularThermo<EquationOfState>::operator=
+inline Foam::hTabularCrThermo<EquationOfState>&
+Foam::hTabularCrThermo<EquationOfState>::operator=
 (
-    const hTabularThermo<EquationOfState>& pt
+    const hTabularCrThermo<EquationOfState>& pt
 )
 {
     EquationOfState::operator=(pt);
@@ -166,25 +166,25 @@ Foam::hTabularThermo<EquationOfState>::operator=
 
 
 template<class EquationOfState>
-inline void Foam::hTabularThermo<EquationOfState>::operator+=
+inline void Foam::hTabularCrThermo<EquationOfState>::operator+=
 (
-    const hTabularThermo<EquationOfState>& pt
+    const hTabularCrThermo<EquationOfState>& pt
 )
 {
 }
 
 
 template<class EquationOfState>
-inline void Foam::hTabularThermo<EquationOfState>::operator-=
+inline void Foam::hTabularCrThermo<EquationOfState>::operator-=
 (
-    const hTabularThermo<EquationOfState>& pt
+    const hTabularCrThermo<EquationOfState>& pt
 )
 {
 }
 
 
 template<class EquationOfState>
-inline void Foam::hTabularThermo<EquationOfState>::operator*=
+inline void Foam::hTabularCrThermo<EquationOfState>::operator*=
 (
     const scalar s
 )
@@ -195,10 +195,10 @@ inline void Foam::hTabularThermo<EquationOfState>::operator*=
 // * * * * * * * * * * * * * * * Friend Operators  * * * * * * * * * * * * * //
 
 template<class EquationOfState>
-inline Foam::hTabularThermo<EquationOfState> Foam::operator+
+inline Foam::hTabularCrThermo<EquationOfState> Foam::operator+
 (
-    const hTabularThermo<EquationOfState>& pt1,
-    const hTabularThermo<EquationOfState>& pt2
+    const hTabularCrThermo<EquationOfState>& pt1,
+    const hTabularCrThermo<EquationOfState>& pt2
 )
 {
     EquationOfState eofs = pt1;
@@ -207,7 +207,7 @@ inline Foam::hTabularThermo<EquationOfState> Foam::operator+
     scalar molr1 = pt1.nMoles()/eofs.nMoles();
     scalar molr2 = pt2.nMoles()/eofs.nMoles();
 
-    return hTabularThermo<EquationOfState>
+    return hTabularCrThermo<EquationOfState>
     (
         eofs,
         molr1*pt1.Hf_ + molr2*pt2.Hf_
@@ -216,10 +216,10 @@ inline Foam::hTabularThermo<EquationOfState> Foam::operator+
 
 
 template<class EquationOfState>
-inline Foam::hTabularThermo<EquationOfState> Foam::operator-
+inline Foam::hTabularCrThermo<EquationOfState> Foam::operator-
 (
-    const hTabularThermo<EquationOfState>& pt1,
-    const hTabularThermo<EquationOfState>& pt2
+    const hTabularCrThermo<EquationOfState>& pt1,
+    const hTabularCrThermo<EquationOfState>& pt2
 )
 {
     EquationOfState eofs = pt1;
@@ -228,7 +228,7 @@ inline Foam::hTabularThermo<EquationOfState> Foam::operator-
     scalar molr1 = pt1.nMoles()/eofs.nMoles();
     scalar molr2 = pt2.nMoles()/eofs.nMoles();
 
-    return hTabularThermo<EquationOfState>
+    return hTabularCrThermo<EquationOfState>
     (
         eofs,
         molr1*pt1.Hf_ - molr2*pt2.Hf_
@@ -237,13 +237,13 @@ inline Foam::hTabularThermo<EquationOfState> Foam::operator-
 
 
 template<class EquationOfState>
-inline Foam::hTabularThermo<EquationOfState> Foam::operator*
+inline Foam::hTabularCrThermo<EquationOfState> Foam::operator*
 (
     const scalar s,
-    const hTabularThermo<EquationOfState>& pt
+    const hTabularCrThermo<EquationOfState>& pt
 )
 {
-    return hTabularThermo<EquationOfState>
+    return hTabularCrThermo<EquationOfState>
     (
         s*static_cast<const EquationOfState&>(pt),
         pt.Hf_
@@ -252,10 +252,10 @@ inline Foam::hTabularThermo<EquationOfState> Foam::operator*
 
 
 template<class EquationOfState>
-inline Foam::hTabularThermo<EquationOfState> Foam::operator==
+inline Foam::hTabularCrThermo<EquationOfState> Foam::operator==
 (
-    const hTabularThermo<EquationOfState>& pt1,
-    const hTabularThermo<EquationOfState>& pt2
+    const hTabularCrThermo<EquationOfState>& pt1,
+    const hTabularCrThermo<EquationOfState>& pt2
 )
 {
     return pt2 - pt1;

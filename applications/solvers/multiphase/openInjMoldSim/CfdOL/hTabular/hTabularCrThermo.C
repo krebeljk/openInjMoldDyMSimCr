@@ -23,13 +23,13 @@ License
 
 \*---------------------------------------------------------------------------*/
 
-#include "hTabularThermo.H"
+#include "hTabularCrThermo.H"
 #include "IOstreams.H"
 
 // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
 
 template<class EquationOfState>
-Foam::hTabularThermo<EquationOfState>::hTabularThermo
+Foam::hTabularCrThermo<EquationOfState>::hTabularCrThermo
 (
     Istream& is
 )
@@ -56,7 +56,7 @@ Foam::hTabularThermo<EquationOfState>::hTabularThermo
 
 
 template<class EquationOfState>
-Foam::hTabularThermo<EquationOfState>::hTabularThermo
+Foam::hTabularCrThermo<EquationOfState>::hTabularCrThermo
 (
     const dictionary& dict
 )
@@ -75,7 +75,7 @@ Foam::hTabularThermo<EquationOfState>::hTabularThermo
 // * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
 
 template<class EquationOfState>
-void Foam::hTabularThermo<EquationOfState>::write
+void Foam::hTabularCrThermo<EquationOfState>::write
 (
     Ostream& os
 ) const
@@ -94,7 +94,7 @@ template<class EquationOfState>
 Foam::Ostream& Foam::operator<<
 (
     Ostream& os,
-    const hTabularThermo<EquationOfState>& pt
+    const hTabularCrThermo<EquationOfState>& pt
 )
 {
     os  << static_cast<const EquationOfState&>(pt) << tab
@@ -105,7 +105,7 @@ Foam::Ostream& Foam::operator<<
         "operator<<"
         "("
             "Ostream&, "
-            "const hTabularThermo<EquationOfState>&"
+            "const hTabularCrThermo<EquationOfState>&"
         ")"
     );
 

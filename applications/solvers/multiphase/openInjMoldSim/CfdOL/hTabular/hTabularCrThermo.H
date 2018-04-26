@@ -22,7 +22,7 @@ License
     along with OpenFOAM.  If not, see <http://www.gnu.org/licenses/>.
 
 Class
-    Foam::hTabularThermo
+    Foam::hTabularCrThermo
 
 Description
     Thermodynamics package templated on the equation of state, using tabular
@@ -31,13 +31,13 @@ Description
     h and s derived from cp
 
 SourceFiles
-    hTabularThermoI.H
-    hTabularThermo.C
+    hTabularCrThermoI.H
+    hTabularCrThermo.C
 
 \*---------------------------------------------------------------------------*/
 
-#ifndef hTabularThermo_H
-#define hTabularThermo_H
+#ifndef hTabularCrThermo_H
+#define hTabularCrThermo_H
 
 #include "scalar.H"
 #include "interpolation2DTable.H"
@@ -50,50 +50,50 @@ namespace Foam
 // Forward declaration of friend functions and operators
 
 template<class EquationOfState>
-class hTabularThermo;
+class hTabularCrThermo;
 
 template<class EquationOfState>
-inline hTabularThermo<EquationOfState> operator+
+inline hTabularCrThermo<EquationOfState> operator+
 (
-    const hTabularThermo<EquationOfState>&,
-    const hTabularThermo<EquationOfState>&
+    const hTabularCrThermo<EquationOfState>&,
+    const hTabularCrThermo<EquationOfState>&
 );
 
 template<class EquationOfState>
-inline hTabularThermo<EquationOfState> operator-
+inline hTabularCrThermo<EquationOfState> operator-
 (
-    const hTabularThermo<EquationOfState>&,
-    const hTabularThermo<EquationOfState>&
+    const hTabularCrThermo<EquationOfState>&,
+    const hTabularCrThermo<EquationOfState>&
 );
 
 template<class EquationOfState>
-inline hTabularThermo<EquationOfState> operator*
+inline hTabularCrThermo<EquationOfState> operator*
 (
     const scalar,
-    const hTabularThermo<EquationOfState>&
+    const hTabularCrThermo<EquationOfState>&
 );
 
 template<class EquationOfState>
-inline hTabularThermo<EquationOfState> operator==
+inline hTabularCrThermo<EquationOfState> operator==
 (
-    const hTabularThermo<EquationOfState>&,
-    const hTabularThermo<EquationOfState>&
+    const hTabularCrThermo<EquationOfState>&,
+    const hTabularCrThermo<EquationOfState>&
 );
 
 template<class EquationOfState>
 Ostream& operator<<
 (
     Ostream&,
-    const hTabularThermo<EquationOfState>&
+    const hTabularCrThermo<EquationOfState>&
 );
 
 
 /*---------------------------------------------------------------------------*\
-                      Class hTabularThermo Declaration
+                      Class hTabularCrThermo Declaration
 \*---------------------------------------------------------------------------*/
 
 template<class EquationOfState>
-class hTabularThermo
+class hTabularCrThermo
 :
     public EquationOfState
 {
@@ -110,7 +110,7 @@ class hTabularThermo
     // Private Member Functions
 
         //- Construct from components
-        inline hTabularThermo
+        inline hTabularCrThermo
         (
             const EquationOfState& pt,
             const scalar Hf
@@ -122,16 +122,16 @@ public:
     // Constructors
 
         //- Construct from Istream
-        hTabularThermo(Istream& is);
+        hTabularCrThermo(Istream& is);
 
         //- Construct from dictionary
-        hTabularThermo(const dictionary& dict);
+        hTabularCrThermo(const dictionary& dict);
 
         //- Construct as copy
-        inline hTabularThermo(const hTabularThermo&);
+        inline hTabularCrThermo(const hTabularCrThermo&);
 
         //- Construct as a named copy
-        inline hTabularThermo(const word&, const hTabularThermo&);
+        inline hTabularCrThermo(const word&, const hTabularCrThermo&);
 
 
     // Member Functions
@@ -171,36 +171,36 @@ public:
 
     // Member operators
 
-        inline hTabularThermo& operator=(const hTabularThermo&);
-        inline void operator+=(const hTabularThermo&);
-        inline void operator-=(const hTabularThermo&);
+        inline hTabularCrThermo& operator=(const hTabularCrThermo&);
+        inline void operator+=(const hTabularCrThermo&);
+        inline void operator-=(const hTabularCrThermo&);
         inline void operator*=(const scalar);
 
 
     // Friend operators
 
-        friend hTabularThermo operator+ <EquationOfState>
+        friend hTabularCrThermo operator+ <EquationOfState>
         (
-            const hTabularThermo&,
-            const hTabularThermo&
+            const hTabularCrThermo&,
+            const hTabularCrThermo&
         );
 
-        friend hTabularThermo operator- <EquationOfState>
+        friend hTabularCrThermo operator- <EquationOfState>
         (
-            const hTabularThermo&,
-            const hTabularThermo&
+            const hTabularCrThermo&,
+            const hTabularCrThermo&
         );
 
-        friend hTabularThermo operator* <EquationOfState>
+        friend hTabularCrThermo operator* <EquationOfState>
         (
             const scalar,
-            const hTabularThermo&
+            const hTabularCrThermo&
         );
 
-        friend hTabularThermo operator== <EquationOfState>
+        friend hTabularCrThermo operator== <EquationOfState>
         (
-            const hTabularThermo&,
-            const hTabularThermo&
+            const hTabularCrThermo&,
+            const hTabularCrThermo&
         );
 
 
@@ -209,7 +209,7 @@ public:
         friend Ostream& operator<< <EquationOfState>
         (
             Ostream&,
-            const hTabularThermo&
+            const hTabularCrThermo&
         );
 };
 
@@ -220,10 +220,10 @@ public:
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-#include "hTabularThermoI.H"
+#include "hTabularCrThermoI.H"
 
 #ifdef NoRepository
-#   include "hTabularThermo.C"
+#   include "hTabularCrThermo.C"
 #endif
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
