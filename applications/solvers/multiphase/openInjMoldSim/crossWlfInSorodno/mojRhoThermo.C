@@ -204,6 +204,11 @@ Foam::volScalarField& Foam::mojRhoThermo::rho()
 }
 
 
+Foam::volScalarField& Foam::mojRhoThermo::cr()
+{
+    return cr_;
+}
+
 const Foam::volScalarField& Foam::mojRhoThermo::psi() const
 {
     return psi_;
