@@ -145,6 +145,21 @@ inline Foam::scalar Foam::taitCr<Specie>::rho(scalar p, scalar T) const // mathe
 }
 
 template<class Specie>
+inline Foam::scalar Foam::taitCr<Specie>::rho(scalar p, scalar T, scalar cr) const
+{
+    scalar spec_volS;
+    scalar spec_volM;
+    scalar spec_vol;
+
+    //melt
+     spec_volM = (b1m_+b2m_*(-b5_+T))*(1-C_*log(1+p*pow(b3m_,-1)*exp(b4m_*(-b5_+T))));
+    //solid
+     spec_volS = (b1s_+b2s_*(-b5_+T))*(1-C_*log(1+p*pow(b3s_,-1)*exp(b4s_*(-b5_+T))));
+
+    return 1.0/(spec_volS * cr + (1-cr) * spec_volM);
+}
+
+template<class Specie>
 inline Foam::scalar Foam::taitCr<Specie>::cTExp(scalar p, scalar T) const // num. der.
 {
     scalar spec_volS;
