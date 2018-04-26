@@ -80,6 +80,22 @@ Foam::mojRhoThermo::mojRhoThermo(const fvMesh& mesh, const word& phaseName)
         mesh,
         dimensionSet(1, -1, -1, 0, 0)
     )
+    ,
+
+    cr_
+    (
+        IOobject
+        (
+            phasePropertyName("thermo:cr"),
+            mesh.time().timeName(),
+            mesh,
+            IOobject::NO_READ,
+            IOobject::NO_WRITE
+        ),
+        mesh,
+        dimensionSet(0, 0, 0, 0, 0)
+    )
+
 {}
 
 
@@ -131,6 +147,21 @@ Foam::mojRhoThermo::mojRhoThermo
         ),
         mesh,
         dimensionSet(1, -1, -1, 0, 0)
+    )
+
+    ,
+    cr_
+    (
+        IOobject
+        (
+            phasePropertyName("thermo:cr"),
+            mesh.time().timeName(),
+            mesh,
+            IOobject::NO_READ,
+            IOobject::NO_WRITE
+        ),
+        mesh,
+        dimensionSet(0, 0, 0, 0, 0)
     )
 {}
 

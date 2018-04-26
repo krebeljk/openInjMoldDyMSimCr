@@ -66,6 +66,8 @@ protected:
         //- Dynamic viscosity [kg/m/s]
         volScalarField mu_;
 
+        //- Relative crystallinity [1]
+        volScalarField cr_;
 
     // Protected Member Functions
 
