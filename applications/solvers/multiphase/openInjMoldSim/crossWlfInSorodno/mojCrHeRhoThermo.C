@@ -154,8 +154,8 @@ void Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::correct()
 }
 
 
-template<class BasicThermo, class MixtureType>
-Foam::tmp<Foam::scalarField> Foam::mojHeThermo<BasicThermo, MixtureType>::Cp
+template<class BasicPsiThermo, class MixtureType>
+Foam::tmp<Foam::scalarField> Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::Cp
 (
     const scalarField& p,
     const scalarField& T,
@@ -175,9 +175,9 @@ Foam::tmp<Foam::scalarField> Foam::mojHeThermo<BasicThermo, MixtureType>::Cp
 }
 
 
-template<class BasicThermo, class MixtureType>
+template<class BasicPsiThermo, class MixtureType>
 Foam::tmp<Foam::volScalarField>
-Foam::mojHeThermo<BasicThermo, MixtureType>::Cp() const
+Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::Cp() const
 {
     const fvMesh& mesh = this->T_.mesh();
 
