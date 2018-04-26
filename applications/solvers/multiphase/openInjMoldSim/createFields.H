@@ -243,3 +243,75 @@ Info<< "Reading solidification properties\n" << endl;
         , dimensionedSymmTensor("zero", dimensionSet(1,-1,-2,0,0,0,0), symmTensor::zero)
         , "zeroGradient"
     );
+
+//Crystallinity
+//Zuidema 2001
+
+//Growth rate - params
+dimensionedScalar zuGmax("zuGmax", dimensionSet(0,1,-1,0,0,0,0), 8.1e-6); //m/s
+dimensionedScalar zuTref("zuTref", dimensionSet(0,0,0,1,0,0,0), 356.8); //K
+dimensionedScalar zua("zua", dimensionSet(-1,1,2,1,0,0,0), 5e-7); //K/Pa
+dimensionedScalar zuPref("zuPref", dimensionSet(1,-1,-2,0,0,0,0), 1e5); //Pa
+dimensionedScalar zuBeta("zuBeta", dimensionSet(0,0,0,2,0,0,0), 1126.9); //K2
+
+//Nucleation - params
+dimensionedScalar zuN1("zuN1", dimensionSet(0,-3,0,-1,0,0,0), -2.6087e13); //K^-1 m^-3
+dimensionedScalar zuN2("zuN2", dimensionSet(0,-3,0,0,0,0,0), 6.5783e15); //m^-3
+
+//Crystallization state fields
+volScalarField zuFi2
+(
+    IOobject
+    (
+        "zuFi2",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::NO_WRITE
+    )
+    ,mesh
+    ,dimensionedScalar("zuFi2init", dimensionSet(0,-2,0,0,0,0,0), 0.0)
+    ,"zeroGradient"
+);
+volScalarField zuFi1
+(
+    IOobject
+    (
+        "zuFi1",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::NO_WRITE
+    )
+    ,mesh
+    ,dimensionedScalar("zuFi1init", dimensionSet(0,-1,0,0,0,0,0), 0.0)
+    ,"zeroGradient"
+);
+volScalarField zuFi0
+(
+    IOobject
+    (
+        "zuFi0",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::NO_WRITE
+    )
+    ,mesh
+    ,dimensionedScalar("zuFi0init", dimensionSet(0,0,0,0,0,0,0), 0.0)
+    ,"zeroGradient"
+);
+volScalarField zuCr
+(
+    IOobject
+    (
+        "zuCr",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::AUTO_WRITE
+    )
+    ,mesh
+    ,dimensionedScalar("zuCr", dimensionSet(0,0,0,0,0,0,0), 0.0)
+    ,"zeroGradient"
+);
