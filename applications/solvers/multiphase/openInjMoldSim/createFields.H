@@ -316,3 +316,41 @@ volScalarField zuCr
     ,dimensionedScalar("zuCr", dimensionSet(0,0,0,0,0,0,0), 0.0)
     ,"zeroGradient"
 );
+
+
+Info<< "Reading crystPropDict properties\n" << endl;
+    const word cryDictName("crystPropDict");
+
+    // Create and input-output object - this holds the path to the dict and its name
+    IOobject cryDictIO
+    (
+        cryDictName, // name of the file
+        mesh.time().constant(), // path to where the file is
+        mesh, // reference to the mesh needed by the constructor
+        IOobject::READ_IF_PRESENT // indicate that reading this dictionary is optional
+    );
+
+    // Check the if the dictionary is present and follows the OF format
+    if (!cryDictIO.headerOk())
+    {
+        Info << "No constant/crystPropDict dictionary found." << endl;
+        Info << "Ultimate crystallinity default value." << endl;
+    }
+
+    // Get access to the dictionary
+    dictionary cryDict;
+    // Initialise the dictionary object
+    cryDict = IOdictionary(cryDictIO);
+
+    // This template method needs to know the type of the variable and can provide
+    // a default value if the entry is not found in the dictionary
+    dimensionedScalar ultCryst("ultCryst", dimensionSet(0,0,0,0,0,0,0),
+        cryDict.lookupOrDefault<scalar>("ultCryst", 0.66)
+    );
+
+    //if (cryDictIO.headerOk())
+    // {
+        // Summarise what's been read and print in the console
+        Info << "Ultimate crystallinity: " << ultCryst << nl
+             << nl << endl;
+    //}

@@ -104,7 +104,7 @@ class hTabularCrThermo
         scalar Hf_;
 	
 	interpolation2DTable<scalar> cpTable;
-	//interpolation2DTable<scalar> hTable; //Kristjan: redundant, governed by TEqn
+	interpolation2DTable<scalar> hfusTable;//latent heat
 
 
     // Private Member Functions
@@ -150,6 +150,9 @@ public:
 
             //- Heat capacity at constant pressure [J/(kmol K)]
             inline scalar cp(const scalar p, const scalar T) const;
+
+            //- Heat of fusion [J/kg]
+            inline scalar Hfus(const scalar p, const scalar T) const;
 
             //- Absolute Enthalpy [J/kmol]
             inline scalar ha(const scalar p, const scalar T) const;

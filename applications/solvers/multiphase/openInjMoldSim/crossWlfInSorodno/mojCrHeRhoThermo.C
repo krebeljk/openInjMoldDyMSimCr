@@ -303,4 +303,73 @@ Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::kappa() const
 
     return tCp;
 }
+
+template<class BasicPsiThermo, class MixtureType>
+Foam::tmp<Foam::scalarField> Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::Hfus
+(
+    const scalarField& p,
+    const scalarField& T,
+    const label patchi
+) const
+{
+    tmp<scalarField> tCp(new scalarField(T.size()));
+    scalarField& cp = tCp();
+
+    forAll(T, facei)
+    {
+        cp[facei] =
+            this->patchFaceMixture(patchi, facei).Hfus(p[facei], T[facei]);
+    }
+
+    return tCp;
+}
+
+
+template<class BasicPsiThermo, class MixtureType>
+Foam::tmp<Foam::volScalarField>
+Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::Hfus() const
+{
+    const fvMesh& mesh = this->T_.mesh();
+
+    tmp<volScalarField> tCp
+    (
+        new volScalarField
+        (
+            IOobject
+            (
+                "Hfus",
+                mesh.time().timeName(),
+                mesh,
+                IOobject::NO_READ,
+                IOobject::NO_WRITE,
+                false
+            ),
+            mesh,
+            dimEnergy/dimMass
+        )
+    );
+
+    volScalarField& cp = tCp();
+
+    forAll(this->T_, celli)
+    {
+        cp[celli] =
+            this->cellMixture(celli).Hfus(this->p_[celli], this->T_[celli]);
+    }
+
+    forAll(this->T_.boundaryField(), patchi)
+    {
+        const fvPatchScalarField& pp = this->p_.boundaryField()[patchi];
+        const fvPatchScalarField& pT = this->T_.boundaryField()[patchi];
+        fvPatchScalarField& pCp = cp.boundaryField()[patchi];
+
+        forAll(pT, facei)
+        {
+            pCp[facei] =
+                this->patchFaceMixture(patchi, facei).Hfus(pp[facei], pT[facei]);
+        }
+    }
+
+    return tCp;
+}
 // ************************************************************************* //

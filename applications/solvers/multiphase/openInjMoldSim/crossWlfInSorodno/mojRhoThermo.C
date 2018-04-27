@@ -214,6 +214,29 @@ const Foam::volScalarField& Foam::mojRhoThermo::psi() const
     return psi_;
 }
 
+Foam::tmp<Foam::volScalarField> Foam::mojRhoThermo::Hfus() const
+{
+    const fvMesh& mesh = this->cr_.mesh();
+
+    tmp<volScalarField> tCp
+    (
+        new volScalarField
+        (
+            IOobject
+            (
+                "Hfus",
+                mesh.time().timeName(),
+                mesh,
+                IOobject::NO_READ,
+                IOobject::NO_WRITE,
+                false
+            ),
+            mesh,
+        dimensionedScalar("thermo:initHfus", dimEnergy/dimMass, 0.0)
+        )
+    );
+    return tCp;
+}
 
 Foam::tmp<Foam::volScalarField> Foam::mojRhoThermo::mu() const
 {
