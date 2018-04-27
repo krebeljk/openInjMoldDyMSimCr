@@ -101,6 +101,14 @@ inline Foam::scalar Foam::hTabularCrThermo<EquationOfState>::cp
     return cpTable(T, p) * this->W();
 }
 
+template<class EquationOfState>
+inline Foam::scalar Foam::hTabularCrThermo<EquationOfState>::Hfus
+(
+    const scalar p, const scalar T
+) const
+{
+    return hfusTable(T, p);
+}
 
 template<class EquationOfState>
 inline Foam::scalar Foam::hTabularCrThermo<EquationOfState>::ha
