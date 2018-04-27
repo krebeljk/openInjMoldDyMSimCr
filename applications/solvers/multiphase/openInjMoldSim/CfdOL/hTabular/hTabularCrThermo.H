@@ -151,6 +151,9 @@ public:
             //- Heat capacity at constant pressure [J/(kmol K)]
             inline scalar cp(const scalar p, const scalar T) const;
 
+            //- Heat of fusion [J/kg]
+            inline scalar Hfus(const scalar p, const scalar T) const;
+
             //- Absolute Enthalpy [J/kmol]
             inline scalar ha(const scalar p, const scalar T) const;
 
