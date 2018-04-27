@@ -129,6 +129,9 @@ public:
             //- Density [kg/m^3]
             virtual tmp<volScalarField> rho() const;
 
+            //- Heat of fusion [J/kg]
+            virtual tmp<volScalarField> Hfus() const;
+
             //- Density for patch [kg/m^3]
             virtual tmp<scalarField> rho(const label patchi) const;
 

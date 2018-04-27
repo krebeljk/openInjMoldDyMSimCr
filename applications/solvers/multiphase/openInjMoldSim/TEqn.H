@@ -11,6 +11,12 @@
           + fvc::div(phi, p)
           )// Dp/Dt
           /mixture.Cp()
+      - rho * mixture.thermo1().Hfus()//Latent heat
+        * (
+            fvc::ddt(zuCr)
+          + fvc::div(phi, zuCr)
+          )// Dcr/Dt
+          /mixture.Cp()
     );
 
     TEqn.relax();
