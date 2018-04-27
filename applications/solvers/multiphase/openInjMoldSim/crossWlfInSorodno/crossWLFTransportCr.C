@@ -48,7 +48,7 @@ Foam::crossWLFTransportCr<Thermo>::crossWLFTransportCr(Istream& is)
     deltaTempInterp_(readScalar(is))
 {
     is.check("crossWLFTransportCr<Thermo>::crossWLFTransportCr(Istream&)");
-    kappa_ = interpolation2DTable<scalar>("constant/kappaTable");
+    kappa_ = interpolation2DTable<scalar>("constant/kappaTableCr");
     kappa_.outOfBounds(interpolation2DTable<scalar>::CLAMP);
 }
 
@@ -71,7 +71,7 @@ Foam::crossWLFTransportCr<Thermo>::crossWLFTransportCr(const dictionary& dict)
     TnoFlow_(readScalar(dict.subDict("transport").lookup("TnoFlow"))),
     deltaTempInterp_(dict.subDict("transport").lookupOrDefault<scalar>("deltaTempInterp", 5.0))
 {
-    kappa_ = interpolation2DTable<scalar>("constant/kappaTable");
+    kappa_ = interpolation2DTable<scalar>("constant/kappaTableCr");
     kappa_.outOfBounds(interpolation2DTable<scalar>::CLAMP);
     Info << "CrossWLF:" << endl;
     Info << "n_               : " << n_              << endl;
