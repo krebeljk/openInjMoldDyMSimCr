@@ -13,7 +13,7 @@
             fvc::ddt(p)
           + fvc::div(phi, p)
           )// Dp/Dt
-      - rho * mixture.thermo1().Hfus()//Latent heat
+      - rho1*alpha1 * mixture.thermo1().Hfus()//Latent heat
         * (
             fvc::ddt(zuCr)
           + fvc::div(phi, zuCr)
