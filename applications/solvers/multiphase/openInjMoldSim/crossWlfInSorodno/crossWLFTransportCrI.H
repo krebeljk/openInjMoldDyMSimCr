@@ -196,12 +196,12 @@ inline Foam::scalar Foam::crossWLFTransportCr<Thermo>::mu
 template<class Thermo>
 inline Foam::scalar Foam::crossWLFTransportCr<Thermo>::kappa
 (
-    const scalar p, const scalar T
+    const scalar p, const scalar cr
 ) const
 {
     //scalar Cv_ = this->Cv(p, T);
     //return mu(p, T)*Cv_*(1.32 + 1.77*this->R()/Cv_);
-    return kappa_(T, p); // this->Cpv(p, T)*mu(p, T)*rPr_;
+    return kappa_(p, cr); // this->Cpv(p, T)*mu(p, T)*rPr_;
 }
 
 

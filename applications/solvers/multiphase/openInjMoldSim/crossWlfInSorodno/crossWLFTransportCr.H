@@ -181,7 +181,7 @@ public:
         inline scalar mu(const scalar p, const scalar T, const scalar strig) const;
 
         //- Thermal conductivity [W/mK]
-        inline scalar kappa(const scalar p, const scalar T) const;
+        inline scalar kappa(const scalar p, const scalar cr) const;
 
         //- Thermal diffusivity of enthalpy [kg/ms]
         inline scalar alphah(const scalar p, const scalar T) const;
