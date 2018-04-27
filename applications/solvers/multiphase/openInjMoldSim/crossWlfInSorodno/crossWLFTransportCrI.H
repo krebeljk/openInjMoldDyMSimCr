@@ -192,6 +192,21 @@ inline Foam::scalar Foam::crossWLFTransportCr<Thermo>::mu
     return visk;
 }
 
+template<class Thermo>
+inline Foam::scalar Foam::crossWLFTransportCr<Thermo>::mu
+(
+    const scalar p,
+    const scalar T,
+    const scalar strig,
+    const scalar cr
+) const
+{
+
+    scalar visk = pow(etaMax_, cr)
+                 *pow(mu(p, T, strig), 1-cr);//weighted avg in log space
+
+    return visk;
+}
 
 template<class Thermo>
 inline Foam::scalar Foam::crossWLFTransportCr<Thermo>::kappa
