@@ -237,7 +237,7 @@ Foam::tmp<Foam::scalarField> Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>
     forAll(T, facei)
     {
         cp[facei] =
-            this->patchFaceMixture(patchi, facei).Cp(cr[facei], T[facei]);
+            this->patchFaceMixture(patchi, facei).kappa(cr[facei], T[facei]);
     }
 
     return tCp;
@@ -273,7 +273,7 @@ Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::kappa() const
     forAll(this->T_, celli)
     {
         cp[celli] =
-            this->cellMixture(celli).Cp(this->cr_[celli], this->T_[celli]);
+            this->cellMixture(celli).kappa(this->cr_[celli], this->T_[celli]);
     }
 
     forAll(this->T_.boundaryField(), patchi)
@@ -285,7 +285,7 @@ Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::kappa() const
         forAll(pT, facei)
         {
             pCp[facei] =
-                this->patchFaceMixture(patchi, facei).Cp(pcr[facei], pT[facei]);
+                this->patchFaceMixture(patchi, facei).kappa(pcr[facei], pT[facei]);
         }
     }
 
