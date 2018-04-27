@@ -226,18 +226,18 @@ Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::Cp() const
 template<class BasicPsiThermo, class MixtureType>
 Foam::tmp<Foam::scalarField> Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::kappa
 (
+    const scalarField& p,
     const scalarField& cr,
-    const scalarField& T,
     const label patchi
 ) const
 {
-    tmp<scalarField> tCp(new scalarField(T.size()));
+    tmp<scalarField> tCp(new scalarField(cr.size()));
     scalarField& cp = tCp();
 
-    forAll(T, facei)
+    forAll(cr, facei)
     {
         cp[facei] =
-            this->patchFaceMixture(patchi, facei).kappa(cr[facei], T[facei]);
+            this->patchFaceMixture(patchi, facei).kappa(p[facei], cr[facei]);
     }
 
     return tCp;
@@ -248,7 +248,7 @@ template<class BasicPsiThermo, class MixtureType>
 Foam::tmp<Foam::volScalarField>
 Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::kappa() const
 {
-    const fvMesh& mesh = this->T_.mesh();
+    const fvMesh& mesh = this->cr_.mesh();
 
     tmp<volScalarField> tCp
     (
@@ -264,28 +264,28 @@ Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::kappa() const
                 false
             ),
             mesh,
-            dimEnergy/dimMass/dimTemperature
+            dimEnergy/dimTime/dimTemperature/dimLength
         )
     );
 
     volScalarField& cp = tCp();
 
-    forAll(this->T_, celli)
+    forAll(this->cr_, celli)
     {
         cp[celli] =
-            this->cellMixture(celli).kappa(this->cr_[celli], this->T_[celli]);
+            this->cellMixture(celli).kappa(this->p_[celli], this->cr_[celli]);
     }
 
-    forAll(this->T_.boundaryField(), patchi)
+    forAll(this->cr_.boundaryField(), patchi)
     {
+        const fvPatchScalarField& pp = this->p_.boundaryField()[patchi];
         const fvPatchScalarField& pcr = this->cr_.boundaryField()[patchi];
-        const fvPatchScalarField& pT = this->T_.boundaryField()[patchi];
         fvPatchScalarField& pCp = cp.boundaryField()[patchi];
 
-        forAll(pT, facei)
+        forAll(pcr, facei)
         {
             pCp[facei] =
-                this->patchFaceMixture(patchi, facei).kappa(pcr[facei], pT[facei]);
+                this->patchFaceMixture(patchi, facei).kappa(pp[facei], pcr[facei]);
         }
     }
 

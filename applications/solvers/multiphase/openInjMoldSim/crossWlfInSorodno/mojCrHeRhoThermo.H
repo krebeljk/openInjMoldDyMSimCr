@@ -101,7 +101,7 @@ public:
         virtual tmp<scalarField> kappa
         (
             const scalarField& p,
-            const scalarField& T,
+            const scalarField& cr,
             const label patchi
         ) const;
 
