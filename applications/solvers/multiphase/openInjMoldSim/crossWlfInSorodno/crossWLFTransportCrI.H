@@ -28,7 +28,7 @@ License
 // * * * * * * * * * * * * * Private Member Functions  * * * * * * * * * * * //
 
 template<class Thermo>
-inline void Foam::crossWLFTransportTTC<Thermo>::calcCoeffs
+inline void Foam::crossWLFTransportCr<Thermo>::calcCoeffs
 (
     const scalar mu1, const scalar T1,
     const scalar mu2, const scalar T2
@@ -47,7 +47,7 @@ inline void Foam::crossWLFTransportTTC<Thermo>::calcCoeffs
 // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
 
 template<class Thermo>
-inline Foam::crossWLFTransportTTC<Thermo>::crossWLFTransportTTC
+inline Foam::crossWLFTransportCr<Thermo>::crossWLFTransportCr
 (
     const Thermo& t,
     const scalar n,
@@ -84,7 +84,7 @@ inline Foam::crossWLFTransportTTC<Thermo>::crossWLFTransportTTC
 
 /*
 template<class Thermo>
-inline Foam::crossWLFTransportTTC<Thermo>::crossWLFTransportTTC
+inline Foam::crossWLFTransportCr<Thermo>::crossWLFTransportCr
 (
     const Thermo& t,
     const scalar mu1, const scalar T1,
@@ -98,10 +98,10 @@ inline Foam::crossWLFTransportTTC<Thermo>::crossWLFTransportTTC
 */
 
 template<class Thermo>
-inline Foam::crossWLFTransportTTC<Thermo>::crossWLFTransportTTC
+inline Foam::crossWLFTransportCr<Thermo>::crossWLFTransportCr
 (
     const word& name,
-    const crossWLFTransportTTC& st
+    const crossWLFTransportCr& st
 )
 :
     Thermo(name, st),
@@ -124,40 +124,40 @@ inline Foam::crossWLFTransportTTC<Thermo>::crossWLFTransportTTC
 
 
 template<class Thermo>
-inline Foam::autoPtr<Foam::crossWLFTransportTTC<Thermo> >
-Foam::crossWLFTransportTTC<Thermo>::clone() const
+inline Foam::autoPtr<Foam::crossWLFTransportCr<Thermo> >
+Foam::crossWLFTransportCr<Thermo>::clone() const
 {
-    return autoPtr<crossWLFTransportTTC<Thermo> >
+    return autoPtr<crossWLFTransportCr<Thermo> >
     (
-        new crossWLFTransportTTC<Thermo>(*this)
+        new crossWLFTransportCr<Thermo>(*this)
     );
 }
 
 
 template<class Thermo>
-inline Foam::autoPtr<Foam::crossWLFTransportTTC<Thermo> >
-Foam::crossWLFTransportTTC<Thermo>::New
+inline Foam::autoPtr<Foam::crossWLFTransportCr<Thermo> >
+Foam::crossWLFTransportCr<Thermo>::New
 (
     Istream& is
 )
 {
-    return autoPtr<crossWLFTransportTTC<Thermo> >
+    return autoPtr<crossWLFTransportCr<Thermo> >
     (
-        new crossWLFTransportTTC<Thermo>(is)
+        new crossWLFTransportCr<Thermo>(is)
     );
 }
 
 
 template<class Thermo>
-inline Foam::autoPtr<Foam::crossWLFTransportTTC<Thermo> >
-Foam::crossWLFTransportTTC<Thermo>::New
+inline Foam::autoPtr<Foam::crossWLFTransportCr<Thermo> >
+Foam::crossWLFTransportCr<Thermo>::New
 (
     const dictionary& dict
 )
 {
-    return autoPtr<crossWLFTransportTTC<Thermo> >
+    return autoPtr<crossWLFTransportCr<Thermo> >
     (
-        new crossWLFTransportTTC<Thermo>(dict)
+        new crossWLFTransportCr<Thermo>(dict)
     );
 }
 
@@ -165,7 +165,7 @@ Foam::crossWLFTransportTTC<Thermo>::New
 // * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
 
 template<class Thermo>
-inline Foam::scalar Foam::crossWLFTransportTTC<Thermo>::mu
+inline Foam::scalar Foam::crossWLFTransportCr<Thermo>::mu
 (
     const scalar p,
     const scalar T,
@@ -194,7 +194,7 @@ inline Foam::scalar Foam::crossWLFTransportTTC<Thermo>::mu
 
 
 template<class Thermo>
-inline Foam::scalar Foam::crossWLFTransportTTC<Thermo>::kappa
+inline Foam::scalar Foam::crossWLFTransportCr<Thermo>::kappa
 (
     const scalar p, const scalar T
 ) const
@@ -206,7 +206,7 @@ inline Foam::scalar Foam::crossWLFTransportTTC<Thermo>::kappa
 
 
 template<class Thermo>
-inline Foam::scalar Foam::crossWLFTransportTTC<Thermo>::alphah
+inline Foam::scalar Foam::crossWLFTransportCr<Thermo>::alphah
 (
     const scalar p,
     const scalar T
@@ -220,10 +220,10 @@ inline Foam::scalar Foam::crossWLFTransportTTC<Thermo>::alphah
 // * * * * * * * * * * * * * * * Member Operators  * * * * * * * * * * * * * //
 
 template<class Thermo>
-inline Foam::crossWLFTransportTTC<Thermo>&
-Foam::crossWLFTransportTTC<Thermo>::operator=
+inline Foam::crossWLFTransportCr<Thermo>&
+Foam::crossWLFTransportCr<Thermo>::operator=
 (
-    const crossWLFTransportTTC<Thermo>& st
+    const crossWLFTransportCr<Thermo>& st
 )
 {
     Thermo::operator=(st);
@@ -247,9 +247,9 @@ Foam::crossWLFTransportTTC<Thermo>::operator=
 
 
 template<class Thermo>
-inline void Foam::crossWLFTransportTTC<Thermo>::operator+=
+inline void Foam::crossWLFTransportCr<Thermo>::operator+=
 (
-    const crossWLFTransportTTC<Thermo>& st
+    const crossWLFTransportCr<Thermo>& st
 )
 {
     scalar molr1 = this->nMoles();
@@ -265,9 +265,9 @@ inline void Foam::crossWLFTransportTTC<Thermo>::operator+=
 
 
 template<class Thermo>
-inline void Foam::crossWLFTransportTTC<Thermo>::operator-=
+inline void Foam::crossWLFTransportCr<Thermo>::operator-=
 (
-    const crossWLFTransportTTC<Thermo>& st
+    const crossWLFTransportCr<Thermo>& st
 )
 {
     scalar molr1 = this->nMoles();
@@ -283,7 +283,7 @@ inline void Foam::crossWLFTransportTTC<Thermo>::operator-=
 
 
 template<class Thermo>
-inline void Foam::crossWLFTransportTTC<Thermo>::operator*=
+inline void Foam::crossWLFTransportCr<Thermo>::operator*=
 (
     const scalar s
 )
@@ -295,10 +295,10 @@ inline void Foam::crossWLFTransportTTC<Thermo>::operator*=
 // * * * * * * * * * * * * * * * Friend Operators  * * * * * * * * * * * * * //
 
 template<class Thermo>
-inline Foam::crossWLFTransportTTC<Thermo> Foam::operator+
+inline Foam::crossWLFTransportCr<Thermo> Foam::operator+
 (
-    const crossWLFTransportTTC<Thermo>& st1,
-    const crossWLFTransportTTC<Thermo>& st2
+    const crossWLFTransportCr<Thermo>& st1,
+    const crossWLFTransportCr<Thermo>& st2
 )
 {
     Thermo t
@@ -309,7 +309,7 @@ inline Foam::crossWLFTransportTTC<Thermo> Foam::operator+
     scalar molr1 = st1.nMoles()/t.nMoles();
     scalar molr2 = st2.nMoles()/t.nMoles();
 
-    return crossWLFTransportTTC<Thermo>
+    return crossWLFTransportCr<Thermo>
     (
         t,
         molr1*st1.As_ + molr2*st2.As_,
@@ -319,10 +319,10 @@ inline Foam::crossWLFTransportTTC<Thermo> Foam::operator+
 
 
 template<class Thermo>
-inline Foam::crossWLFTransportTTC<Thermo> Foam::operator-
+inline Foam::crossWLFTransportCr<Thermo> Foam::operator-
 (
-    const crossWLFTransportTTC<Thermo>& st1,
-    const crossWLFTransportTTC<Thermo>& st2
+    const crossWLFTransportCr<Thermo>& st1,
+    const crossWLFTransportCr<Thermo>& st2
 )
 {
     Thermo t
@@ -333,7 +333,7 @@ inline Foam::crossWLFTransportTTC<Thermo> Foam::operator-
     scalar molr1 = st1.nMoles()/t.nMoles();
     scalar molr2 = st2.nMoles()/t.nMoles();
 
-    return crossWLFTransportTTC<Thermo>
+    return crossWLFTransportCr<Thermo>
     (
         t,
         molr1*st1.As_ - molr2*st2.As_,
@@ -343,13 +343,13 @@ inline Foam::crossWLFTransportTTC<Thermo> Foam::operator-
 
 
 template<class Thermo>
-inline Foam::crossWLFTransportTTC<Thermo> Foam::operator*
+inline Foam::crossWLFTransportCr<Thermo> Foam::operator*
 (
     const scalar s,
-    const crossWLFTransportTTC<Thermo>& st
+    const crossWLFTransportCr<Thermo>& st
 )
 {
-    return crossWLFTransportTTC<Thermo>
+    return crossWLFTransportCr<Thermo>
     (
         s*static_cast<const Thermo&>(st),
         st.As_,
@@ -359,10 +359,10 @@ inline Foam::crossWLFTransportTTC<Thermo> Foam::operator*
 
 
 template<class Thermo>
-inline Foam::crossWLFTransportTTC<Thermo> Foam::operator==
+inline Foam::crossWLFTransportCr<Thermo> Foam::operator==
 (
-    const crossWLFTransportTTC<Thermo>& st1,
-    const crossWLFTransportTTC<Thermo>& st2
+    const crossWLFTransportCr<Thermo>& st1,
+    const crossWLFTransportCr<Thermo>& st2
 )
 {
     return st2 - st1;

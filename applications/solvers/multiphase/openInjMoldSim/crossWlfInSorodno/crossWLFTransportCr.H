@@ -22,7 +22,7 @@ License
     along with OpenFOAM.  If not, see <http://www.gnu.org/licenses/>.
 
 Class
-    Foam::crossWLFTransportTTC
+    Foam::crossWLFTransportCr
 
 Description
     Transport package using crossWLF's formula.
@@ -36,13 +36,13 @@ Description
     \f]
 
 SourceFiles
-    crossWLFTransportTTCI.H
-    crossWLFTransportTTC.C
+    crossWLFTransportCrI.H
+    crossWLFTransportCr.C
 
 \*---------------------------------------------------------------------------*/
 
-#ifndef crossWLFTransportTTC_H
-#define crossWLFTransportTTC_H
+#ifndef crossWLFTransportCr_H
+#define crossWLFTransportCr_H
 #include "interpolation2DTable.H"
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -51,50 +51,50 @@ namespace Foam
 
 // Forward declaration of friend functions and operators
 
-template<class Thermo> class crossWLFTransportTTC;
+template<class Thermo> class crossWLFTransportCr;
 
 template<class Thermo>
-inline crossWLFTransportTTC<Thermo> operator+
+inline crossWLFTransportCr<Thermo> operator+
 (
-    const crossWLFTransportTTC<Thermo>&,
-    const crossWLFTransportTTC<Thermo>&
+    const crossWLFTransportCr<Thermo>&,
+    const crossWLFTransportCr<Thermo>&
 );
 
 template<class Thermo>
-inline crossWLFTransportTTC<Thermo> operator-
+inline crossWLFTransportCr<Thermo> operator-
 (
-    const crossWLFTransportTTC<Thermo>&,
-    const crossWLFTransportTTC<Thermo>&
+    const crossWLFTransportCr<Thermo>&,
+    const crossWLFTransportCr<Thermo>&
 );
 
 template<class Thermo>
-inline crossWLFTransportTTC<Thermo> operator*
+inline crossWLFTransportCr<Thermo> operator*
 (
     const scalar,
-    const crossWLFTransportTTC<Thermo>&
+    const crossWLFTransportCr<Thermo>&
 );
 
 template<class Thermo>
-inline crossWLFTransportTTC<Thermo> operator==
+inline crossWLFTransportCr<Thermo> operator==
 (
-    const crossWLFTransportTTC<Thermo>&,
-    const crossWLFTransportTTC<Thermo>&
+    const crossWLFTransportCr<Thermo>&,
+    const crossWLFTransportCr<Thermo>&
 );
 
 template<class Thermo>
 Ostream& operator<<
 (
     Ostream&,
-    const crossWLFTransportTTC<Thermo>&
+    const crossWLFTransportCr<Thermo>&
 );
 
 
 /*---------------------------------------------------------------------------*\
-                    Class crossWLFTransportTTC Declaration
+                    Class crossWLFTransportCr Declaration
 \*---------------------------------------------------------------------------*/
 
 template<class Thermo>
-class crossWLFTransportTTC
+class crossWLFTransportCr
 :
     public Thermo
 {
@@ -124,7 +124,7 @@ public:
     // Constructors
 
         //- Construct from components
-        inline crossWLFTransportTTC
+        inline crossWLFTransportCr
         (
             const Thermo& t,
             const scalar n_,
@@ -143,7 +143,7 @@ public:
         );
 
         //- Construct from two viscosities
-        inline crossWLFTransportTTC
+        inline crossWLFTransportCr
         (
             const Thermo& t,
             const scalar mu1, const scalar T1,
@@ -151,22 +151,22 @@ public:
         );
 
         //- Construct as named copy
-        inline crossWLFTransportTTC(const word&, const crossWLFTransportTTC&);
+        inline crossWLFTransportCr(const word&, const crossWLFTransportCr&);
 
         //- Construct from Istream
-        crossWLFTransportTTC(Istream&);
+        crossWLFTransportCr(Istream&);
 
         //- Construct from dictionary
-        crossWLFTransportTTC(const dictionary& dict);
+        crossWLFTransportCr(const dictionary& dict);
 
         //- Construct and return a clone
-        inline autoPtr<crossWLFTransportTTC> clone() const;
+        inline autoPtr<crossWLFTransportCr> clone() const;
 
         // Selector from Istream
-        inline static autoPtr<crossWLFTransportTTC> New(Istream& is);
+        inline static autoPtr<crossWLFTransportCr> New(Istream& is);
 
         // Selector from dictionary
-        inline static autoPtr<crossWLFTransportTTC> New(const dictionary& dict);
+        inline static autoPtr<crossWLFTransportCr> New(const dictionary& dict);
 
 
     // Member functions
@@ -195,39 +195,39 @@ public:
 
     // Member operators
 
-        inline crossWLFTransportTTC& operator=(const crossWLFTransportTTC&);
+        inline crossWLFTransportCr& operator=(const crossWLFTransportCr&);
 
-        inline void operator+=(const crossWLFTransportTTC&);
+        inline void operator+=(const crossWLFTransportCr&);
 
-        inline void operator-=(const crossWLFTransportTTC&);
+        inline void operator-=(const crossWLFTransportCr&);
 
         inline void operator*=(const scalar);
 
 
     // Friend operators
 
-        friend crossWLFTransportTTC operator+ <Thermo>
+        friend crossWLFTransportCr operator+ <Thermo>
         (
-            const crossWLFTransportTTC&,
-            const crossWLFTransportTTC&
+            const crossWLFTransportCr&,
+            const crossWLFTransportCr&
         );
 
-        friend crossWLFTransportTTC operator- <Thermo>
+        friend crossWLFTransportCr operator- <Thermo>
         (
-            const crossWLFTransportTTC&,
-            const crossWLFTransportTTC&
+            const crossWLFTransportCr&,
+            const crossWLFTransportCr&
         );
 
-        friend crossWLFTransportTTC operator* <Thermo>
+        friend crossWLFTransportCr operator* <Thermo>
         (
             const scalar,
-            const crossWLFTransportTTC&
+            const crossWLFTransportCr&
         );
 
-        friend crossWLFTransportTTC operator== <Thermo>
+        friend crossWLFTransportCr operator== <Thermo>
         (
-            const crossWLFTransportTTC&,
-            const crossWLFTransportTTC&
+            const crossWLFTransportCr&,
+            const crossWLFTransportCr&
         );
 
 
@@ -236,7 +236,7 @@ public:
         friend Ostream& operator<< <Thermo>
         (
             Ostream&,
-            const crossWLFTransportTTC&
+            const crossWLFTransportCr&
         );
 };
 
@@ -247,10 +247,10 @@ public:
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-#include "crossWLFTransportTTCI.H"
+#include "crossWLFTransportCrI.H"
 
 #ifdef NoRepository
-#   include "crossWLFTransportTTC.C"
+#   include "crossWLFTransportCr.C"
 #endif
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //

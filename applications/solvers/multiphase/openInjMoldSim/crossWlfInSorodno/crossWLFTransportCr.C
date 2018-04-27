@@ -25,13 +25,13 @@ License
 
 \*---------------------------------------------------------------------------*/
 
-#include "crossWLFTransportTTC.H"
+#include "crossWLFTransportCr.H"
 #include "IOstreams.H"
 
 // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
 
 template<class Thermo>
-Foam::crossWLFTransportTTC<Thermo>::crossWLFTransportTTC(Istream& is)
+Foam::crossWLFTransportCr<Thermo>::crossWLFTransportCr(Istream& is)
 :
     Thermo(is),
     n_(readScalar(is)),
@@ -47,14 +47,14 @@ Foam::crossWLFTransportTTC<Thermo>::crossWLFTransportTTC(Istream& is)
     TnoFlow_(readScalar(is)),
     deltaTempInterp_(readScalar(is))
 {
-    is.check("crossWLFTransportTTC<Thermo>::crossWLFTransportTTC(Istream&)");
+    is.check("crossWLFTransportCr<Thermo>::crossWLFTransportCr(Istream&)");
     kappa_ = interpolation2DTable<scalar>("constant/kappaTable");
     kappa_.outOfBounds(interpolation2DTable<scalar>::CLAMP);
 }
 
 
 template<class Thermo>
-Foam::crossWLFTransportTTC<Thermo>::crossWLFTransportTTC(const dictionary& dict)
+Foam::crossWLFTransportCr<Thermo>::crossWLFTransportCr(const dictionary& dict)
 :
     Thermo(dict),
     n_(readScalar(dict.subDict("transport").lookup("n"))),
@@ -93,7 +93,7 @@ Foam::crossWLFTransportTTC<Thermo>::crossWLFTransportTTC(const dictionary& dict)
 // * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
 
 template<class Thermo>
-void Foam::crossWLFTransportTTC<Thermo>::write(Ostream& os) const
+void Foam::crossWLFTransportCr<Thermo>::write(Ostream& os) const
 {
     os  << this->specie::name() << endl;
     os  << token::BEGIN_BLOCK  << incrIndent << nl;
@@ -124,7 +124,7 @@ template<class Thermo>
 Foam::Ostream& Foam::operator<<
 (
     Ostream& os,
-    const crossWLFTransportTTC<Thermo>& st
+    const crossWLFTransportCr<Thermo>& st
 )
 {
     os << static_cast<const Thermo&>(st)
@@ -143,7 +143,7 @@ Foam::Ostream& Foam::operator<<
 
     os.check
     (
-        "Ostream& operator<<(Ostream&, const crossWLFTransportTTC<Thermo>&)"
+        "Ostream& operator<<(Ostream&, const crossWLFTransportCr<Thermo>&)"
     );
 
     return os;
