@@ -345,10 +345,10 @@ Info<< "Reading crystPropDict properties\n" << endl;
     // This template method needs to know the type of the variable and can provide
     // a default value if the entry is not found in the dictionary
     dimensionedScalar ultCryst("ultCryst", dimensionSet(0,0,0,0,0,0,0),
-        sldDict.lookupOrDefault<scalar>("ultCryst", 0.66)
+        cryDict.lookupOrDefault<scalar>("ultCryst", 0.66)
     );
 
-    //if (sldDictIO.headerOk())
+    //if (cryDictIO.headerOk())
     // {
         // Summarise what's been read and print in the console
         Info << "Ultimate crystallinity: " << ultCryst << nl
