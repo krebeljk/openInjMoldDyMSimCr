@@ -96,6 +96,17 @@ public:
 
         //- Heat capacity at constant pressure [J/kg/K]
         virtual tmp<volScalarField> Cp() const;
+
+        //- thermal conductivity [J/s/K/m]
+        virtual tmp<scalarField> kappa
+        (
+            const scalarField& p,
+            const scalarField& T,
+            const label patchi
+        ) const;
+
+        //- thermal conductivity [J/s/K/m]
+        virtual tmp<volScalarField> kappa() const;
 };
 
 
