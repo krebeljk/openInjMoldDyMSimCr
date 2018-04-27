@@ -48,6 +48,7 @@ License
 #include "taitCr.H"
 #include "crossWLFTransport.H"
 #include "crossWLFTransportTTC.H"
+#include "crossWLFTransportCr.H"
 
 #include "icoPolynomial.H"
 #include "hPolynomialThermo.H"
@@ -230,7 +231,7 @@ mojMakeThermo
     mojRhoThermo,
     mojCrHeRhoThermo,//new
     pureMixture,
-    crossWLFTransportTTC,
+    crossWLFTransportCr,
     sensibleInternalEnergy,
     hTabularCrThermo,
     taitCr,//new
