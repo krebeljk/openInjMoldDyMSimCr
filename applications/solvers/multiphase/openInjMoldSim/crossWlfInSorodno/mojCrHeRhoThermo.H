@@ -85,6 +85,17 @@ public:
 
         //- Update properties
         virtual void correct();
+
+        //- Heat capacity at constant pressure for patch [J/kg/K]
+        virtual tmp<scalarField> Cp
+        (
+            const scalarField& p,
+            const scalarField& T,
+            const label patchi
+        ) const;
+
+        //- Heat capacity at constant pressure [J/kg/K]
+        virtual tmp<volScalarField> Cp() const;
 };
 
 
