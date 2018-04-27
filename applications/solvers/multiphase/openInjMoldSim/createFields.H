@@ -318,48 +318,39 @@ volScalarField zuCr
 );
 
 
-Info<< "Reading solidification properties\n" << endl;
-    const word sldDictName("solidificationProperties");
+Info<< "Reading crystPropDict properties\n" << endl;
+    const word cryDictName("crystPropDict");
 
     // Create and input-output object - this holds the path to the dict and its name
-    IOobject sldDictIO
+    IOobject cryDictIO
     (
-        sldDictName, // name of the file
+        cryDictName, // name of the file
         mesh.time().constant(), // path to where the file is
         mesh, // reference to the mesh needed by the constructor
         IOobject::READ_IF_PRESENT // indicate that reading this dictionary is optional
     );
 
     // Check the if the dictionary is present and follows the OF format
-    if (!sldDictIO.headerOk())
+    if (!cryDictIO.headerOk())
     {
-        Info << "No constant/solidificationProperties dictionary found." << endl;
-        Info << "Flow cessation modeled as visc(TnoFlow)=etaMax." << nl << nl << endl;
+        Info << "No constant/crystPropDict dictionary found." << endl;
+        Info << "Ultimate crystallinity default value." << endl;
     }
 
     // Get access to the dictionary
-    dictionary sldDict;
+    dictionary cryDict;
     // Initialise the dictionary object
-    sldDict = IOdictionary(sldDictIO);
+    cryDict = IOdictionary(cryDictIO);
 
     // This template method needs to know the type of the variable and can provide
     // a default value if the entry is not found in the dictionary
-    dimensionedScalar shrMod("shearModulus", dimensionSet(1,-1,-2,0,0,0,0),
-        sldDict.lookupOrDefault<scalar>("shearModulus", 900e6)
-    );
-    dimensionedScalar shrRateLimEl("shrRateLimEl", dimensionSet(0,0,-1,0,0,0,0),
-        sldDict.lookupOrDefault<scalar>("shrRateLimEl", 1.0)
-    );
-    dimensionedScalar viscLimEl("viscLimEl", dimensionSet(1,-1,-1,0,0,0,0),
-        sldDict.lookupOrDefault<scalar>("viscLimEl", 1e6)
+    dimensionedScalar ultCryst("ultCryst", dimensionSet(0,0,0,0,0,0,0),
+        sldDict.lookupOrDefault<scalar>("ultCryst", 0.66)
     );
 
-    if (sldDictIO.headerOk())
-    {
+    //if (sldDictIO.headerOk())
+    // {
         // Summarise what's been read and print in the console
-        Info << nl << "Solidification properties: " << nl
-             << "Shear modulus: " << shrMod << nl
-             << "Highest shear rate with elasticity: " << shrRateLimEl << nl
-             << "Lowest viscosity with elasticity: " << viscLimEl << nl
+        Info << "Ultimate crystallinity: " << ultCryst << nl
              << nl << endl;
-    }
+    //}
