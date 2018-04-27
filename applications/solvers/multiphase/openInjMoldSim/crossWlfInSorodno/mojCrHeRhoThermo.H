@@ -97,6 +97,17 @@ public:
         //- Heat capacity at constant pressure [J/kg/K]
         virtual tmp<volScalarField> Cp() const;
 
+        //- Latent heat [J/kg]
+        virtual tmp<scalarField> Hfus
+        (
+            const scalarField& p,
+            const scalarField& T,
+            const label patchi
+        ) const;
+
+        //- Latent heat [J/kg]
+        virtual tmp<volScalarField> Hfus() const;
+
         //- thermal conductivity [J/s/K/m]
         virtual tmp<scalarField> kappa
         (
