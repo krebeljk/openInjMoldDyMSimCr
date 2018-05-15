@@ -192,6 +192,7 @@ public:
 
             //- Return coef. of vol. therm. expansion [J/(kmol K]
             inline scalar cTExp(scalar p, scalar T) const;
+            inline scalar cTExp(scalar p, scalar T, scalar cr) const;
 
 
         // IO

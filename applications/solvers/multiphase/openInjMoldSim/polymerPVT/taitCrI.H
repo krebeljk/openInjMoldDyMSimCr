@@ -191,6 +191,18 @@ inline Foam::scalar Foam::taitCr<Specie>::cTExp(scalar p, scalar T) const // num
     return coefThermExp;
 }
 
+template<class Specie>
+inline Foam::scalar Foam::taitCr<Specie>::cTExp(scalar p, scalar T, scalar cr) const // num. der.
+{
+    scalar dT = 2.0; //[K]
+
+    scalar spec_volS = 1.0/rho(p, T, cr);
+    scalar spec_volSp = 1.0/rho(p, T + dT, cr);
+    scalar spec_volSm = 1.0/rho(p, T - dT, cr);
+
+    return (spec_volSp-spec_volSm)/(spec_volS*2.0*dT);
+}
+
 
 template<class Specie>
 inline Foam::scalar Foam::taitCr<Specie>::s(scalar p, scalar T) const // POZOR - NI TESTIRANO
