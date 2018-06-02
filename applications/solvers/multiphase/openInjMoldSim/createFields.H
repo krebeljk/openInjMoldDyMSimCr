@@ -247,17 +247,68 @@ Info<< "Reading solidification properties\n" << endl;
 
 //Crystallinity
 //Zuidema 2001
+Info<< "Reading crystallization properties\n" << endl;
+    const word cryDictName("crystallizationProperties");
 
-//Growth rate - params
-dimensionedScalar zuGmax("zuGmax", dimensionSet(0,1,-1,0,0,0,0), 8.1e-6); //m/s
-dimensionedScalar zuTref("zuTref", dimensionSet(0,0,0,1,0,0,0), 356.8); //K
-dimensionedScalar zua("zua", dimensionSet(-1,1,2,1,0,0,0), 5e-7); //K/Pa
-dimensionedScalar zuPref("zuPref", dimensionSet(1,-1,-2,0,0,0,0), 1e5); //Pa
-dimensionedScalar zuBeta("zuBeta", dimensionSet(0,0,0,2,0,0,0), 1126.9); //K2
 
-//Nucleation - params
-dimensionedScalar zuN1("zuN1", dimensionSet(0,-3,0,-1,0,0,0), -2.6087e13); //K^-1 m^-3
-dimensionedScalar zuN2("zuN2", dimensionSet(0,-3,0,0,0,0,0), 6.5783e15); //m^-3
+    // Create and input-output object - this holds the path to the dict and its name
+    IOobject cryDictIO
+    (
+        cryDictName, // name of the file
+        mesh.time().constant(), // path to where the file is
+        mesh, // reference to the mesh needed by the constructor
+        IOobject::READ_IF_PRESENT // indicate that reading this dictionary is optional
+    );
+
+    // Check the if the dictionary is present and follows the OF format
+    if (!cryDictIO.headerOk())
+    {
+        Info << "No constant/crystallizationProperties dictionary found." << endl;
+        Info << "Defaulting to Zuidema 2001 parameters of crystallization." << nl << nl << endl;
+    }
+
+    // Get access to the dictionary
+    dictionary cryDict;
+    // Initialise the dictionary object
+    cryDict = IOdictionary(cryDictIO);
+
+    //Growth rate - params
+    dimensionedScalar zuGmax("zuGmax", dimensionSet(0,1,-1,0,0,0,0),
+        cryDict.lookupOrDefault<scalar>("Gmax", 8.1e-6)
+    ); //m/s
+    dimensionedScalar zuTref("zuTref", dimensionSet(0,0,0,1,0,0,0),
+        cryDict.lookupOrDefault<scalar>("Tref", 356.8)
+    ); //K
+    dimensionedScalar zua("zua", dimensionSet(-1,1,2,1,0,0,0),
+        cryDict.lookupOrDefault<scalar>("a", 5e-7)
+    ); //K/Pa
+    dimensionedScalar zuPref("zuPref", dimensionSet(1,-1,-2,0,0,0,0),
+        cryDict.lookupOrDefault<scalar>("pRef", 1e5)
+    ); //Pa
+    dimensionedScalar zuBeta("zuBeta", dimensionSet(0,0,0,2,0,0,0),
+        cryDict.lookupOrDefault<scalar>("beta", 1126.9)
+    ); //K2
+    //Nucleation - params
+    dimensionedScalar zuN1("zuN1", dimensionSet(0,-3,0,-1,0,0,0),
+        cryDict.lookupOrDefault<scalar>("N1", -2.6087e13)
+    ); //K^-1 m^-3
+    dimensionedScalar zuN2("zuN2", dimensionSet(0,-3,0,0,0,0,0),
+        cryDict.lookupOrDefault<scalar>("N2", 6.5783e15)
+    ); //m^-3
+
+    if (cryDictIO.headerOk())
+    {
+        // Summarise what's been read and print in the console
+        Info << nl << "Crystallization properties: " << nl
+             << "Gmax: " << zuGmax << nl
+             << "Tref: " << zuTref << nl
+             << "a: " << zua << nl
+             << "pRef: " << zuPref << nl
+             << "beta: " << zuBeta << nl
+             << "N1: " << zuN1 << nl
+             << "N2: " << zuN2 << nl
+             << nl << endl;
+    }
 
 //Crystallization state fields
 volScalarField zuFi2
