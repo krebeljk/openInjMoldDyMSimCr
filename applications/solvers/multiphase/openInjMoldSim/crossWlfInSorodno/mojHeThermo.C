@@ -457,6 +457,28 @@ Foam::mojHeThermo<BasicThermo, MixtureType>::cTExp
     return tCv;
 }
 
+template<class BasicThermo, class MixtureType>
+Foam::tmp<Foam::scalarField>
+Foam::mojHeThermo<BasicThermo, MixtureType>::cTExp
+(
+    const scalarField& p,
+    const scalarField& T,
+    const scalarField& cr,
+    const label patchi
+) const
+{
+    tmp<scalarField> tCv(new scalarField(T.size()));
+    scalarField& cv = tCv();
+
+    forAll(T, facei)
+    {
+        cv[facei] =
+            this->patchFaceMixture(patchi, facei).cTExp(p[facei], T[facei]);
+    }
+
+    return tCv;
+}
+
 
 template<class BasicThermo, class MixtureType>
 Foam::tmp<Foam::volScalarField>

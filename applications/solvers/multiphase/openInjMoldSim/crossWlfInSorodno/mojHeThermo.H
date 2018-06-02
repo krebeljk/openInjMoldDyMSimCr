@@ -227,6 +227,15 @@ public:
                 const scalarField& T,
                 const label patchi
             ) const;
+            //- Vol. therm. exp. [1/K]
+            virtual tmp<scalarField> cTExp
+            (
+                const scalarField& p,
+                const scalarField& T,
+                const scalarField& cr,
+                const label patchi
+            ) const;
+
 
             //- Vol. therm. exp. [1/K]
             virtual tmp<volScalarField> cTExp() const;
