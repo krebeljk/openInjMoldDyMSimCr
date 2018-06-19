@@ -138,8 +138,10 @@ public:
             //- Return non-const access to the local density field [kg/m^3]
             virtual volScalarField& rho();
 
-            //- Return non-const access to the local rel. cry. field [1]
+            //- Return non-const access to the local rel. cry. field [1] // mass fraction
             virtual volScalarField& cr();
+            //- Return non-const access to the local rel. cry. field [1] // volume fraction
+            virtual volScalarField& crV();
 
             //- Compressibility [s^2/m^2]
             virtual const volScalarField& psi() const;
