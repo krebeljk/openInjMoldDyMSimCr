@@ -61,6 +61,7 @@
 
     // zuCr
     zuCr = 1 - exp(-zuFi0);
-    crPolyV = zuCr; //transfer crystallinity to thermo
+    crPolyV = zuCr; //transfer vol-crystallinity to thermo
+    zuCrM = crPolyM; //write cr mass fraction output
 
 }
