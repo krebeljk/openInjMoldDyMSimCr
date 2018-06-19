@@ -52,7 +52,8 @@ Info<< "Reading thermophysical properties\n" << endl;
 volScalarField& p = mixture.p();
 volScalarField& T = mixture.T();
 volScalarField& strig = mixture.thermo1().strig();
-volScalarField& crPoly = mixture.thermo1().cr();//reference to rel cry field of poly
+volScalarField& crPolyV = mixture.thermo1().crV();//reference to rel cry field of poly
+volScalarField& crPolyM = mixture.thermo1().cr();//reference to rel cry field of poly
 volScalarField& rho1 = mixture.thermo1().rho();
 const volScalarField& psi1 = mixture.thermo1().psi();
 volScalarField& rho2 = mixture.thermo2().rho();
@@ -80,7 +81,6 @@ dimensionedScalar pMin
 );
 
 mesh.setFluxRequired(p_rgh.name());
-
 //kristjan - za HTC
 
 volScalarField mojKappaOut
