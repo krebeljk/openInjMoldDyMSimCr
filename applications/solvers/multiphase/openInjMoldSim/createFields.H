@@ -359,7 +359,7 @@ volScalarField zuFi0
     ,dimensionedScalar("zuFi0init", dimensionSet(0,0,0,0,0,0,0), 0.0)
     ,"zeroGradient"
 );
-volScalarField zuCr
+volScalarField zuCr // crystalline volume fraction
 (
     IOobject
     (
@@ -374,3 +374,17 @@ volScalarField zuCr
     ,"zeroGradient"
 );
 
+volScalarField zuCrM // crystalline mass fraction
+(
+    IOobject
+    (
+        "zuCrM",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::AUTO_WRITE
+    )
+    ,mesh
+    ,dimensionedScalar("zuCrM", dimensionSet(0,0,0,0,0,0,0), 0.0)
+    ,"zeroGradient"
+);
