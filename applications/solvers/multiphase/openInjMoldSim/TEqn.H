@@ -16,8 +16,8 @@
       - rho1*alpha1
        *ultCryst*mixture.thermo1().Hfus()//Latent heat
         * (
-            fvc::ddt(zuCr)
-          + (U & fvc::grad(zuCr))
+            fvc::ddt(zuCrM)
+          + (U & fvc::grad(zuCrM))
           )// Dcr/Dt
     );
 

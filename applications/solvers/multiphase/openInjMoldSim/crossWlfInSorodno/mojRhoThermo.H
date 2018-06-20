@@ -66,8 +66,10 @@ protected:
         //- Dynamic viscosity [kg/m/s]
         volScalarField mu_;
 
-        //- Relative crystallinity [1]
+        //- Relative crystallinity [1] -- mass share
         volScalarField cr_;
+        //- Relative crystallinity [1] -- volume fraction
+        volScalarField crV_;
 
     // Protected Member Functions
 
@@ -138,8 +140,10 @@ public:
             //- Return non-const access to the local density field [kg/m^3]
             virtual volScalarField& rho();
 
-            //- Return non-const access to the local rel. cry. field [1]
+            //- Return non-const access to the local rel. cry. field [1] // mass fraction
             virtual volScalarField& cr();
+            //- Return non-const access to the local rel. cry. field [1] // volume fraction
+            virtual volScalarField& crV();
 
             //- Compressibility [s^2/m^2]
             virtual const volScalarField& psi() const;

@@ -95,6 +95,21 @@ Foam::mojRhoThermo::mojRhoThermo(const fvMesh& mesh, const word& phaseName)
         mesh,
         dimensionedScalar("thermo:initcr", dimensionSet(0,0,0,0,0,0,0), 0.0)
     )
+    ,
+
+    crV_
+    (
+        IOobject
+        (
+            phasePropertyName("thermo:crV"),
+            mesh.time().timeName(),
+            mesh,
+            IOobject::NO_READ,
+            IOobject::NO_WRITE
+        ),
+        mesh,
+        dimensionedScalar("thermo:initcrV", dimensionSet(0,0,0,0,0,0,0), 0.0)
+    )
 
 {}
 
@@ -163,6 +178,20 @@ Foam::mojRhoThermo::mojRhoThermo
         mesh,
         dimensionedScalar("thermo:initcr", dimensionSet(0,0,0,0,0,0,0), 0.0)
     )
+    ,
+    crV_
+    (
+        IOobject
+        (
+            phasePropertyName("thermo:crV"),
+            mesh.time().timeName(),
+            mesh,
+            IOobject::NO_READ,
+            IOobject::NO_WRITE
+        ),
+        mesh,
+        dimensionedScalar("thermo:initcrV", dimensionSet(0,0,0,0,0,0,0), 0.0)
+    )
 {}
 
 
@@ -207,6 +236,10 @@ Foam::volScalarField& Foam::mojRhoThermo::rho()
 Foam::volScalarField& Foam::mojRhoThermo::cr()
 {
     return cr_;
+}
+Foam::volScalarField& Foam::mojRhoThermo::crV()
+{
+    return crV_;
 }
 
 const Foam::volScalarField& Foam::mojRhoThermo::psi() const
