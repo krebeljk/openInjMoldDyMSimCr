@@ -45,7 +45,11 @@ Foam::crossWLFTransportCr<Thermo>::crossWLFTransportCr(Istream& is)
     etaMin_(readScalar(is)),
     etaMax_(readScalar(is)),
     TnoFlow_(readScalar(is)),
-    deltaTempInterp_(readScalar(is))
+    deltaTempInterp_(readScalar(is)),
+    crF_(readScalar(is)),
+    crH_(readScalar(is)),
+    crM_(readScalar(is)),
+    crUlt_(readScalar(is))
 {
     is.check("crossWLFTransportCr<Thermo>::crossWLFTransportCr(Istream&)");
     kappa_ = interpolation2DTable<scalar>("constant/kappaTableCr");
@@ -69,24 +73,32 @@ Foam::crossWLFTransportCr<Thermo>::crossWLFTransportCr(const dictionary& dict)
     etaMin_(readScalar(dict.subDict("transport").lookup("etaMin"))),
     etaMax_(readScalar(dict.subDict("transport").lookup("etaMax"))),
     TnoFlow_(readScalar(dict.subDict("transport").lookup("TnoFlow"))),
-    deltaTempInterp_(dict.subDict("transport").lookupOrDefault<scalar>("deltaTempInterp", 5.0))
+    deltaTempInterp_(dict.subDict("transport").lookupOrDefault<scalar>("deltaTempInterp", 5.0)),
+    crF_(dict.subDict("transport").lookupOrDefault<scalar>("crF", 1e4)),
+    crH_(dict.subDict("transport").lookupOrDefault<scalar>("crH", 1.5)),
+    crM_(dict.subDict("transport").lookupOrDefault<scalar>("crM", 0.4)),
+    crUlt_(dict.subDict("transport").lookupOrDefault<scalar>("crUlt", 0.66))
 {
     kappa_ = interpolation2DTable<scalar>("constant/kappaTableCr");
     kappa_.outOfBounds(interpolation2DTable<scalar>::CLAMP);
     Info << "CrossWLF:" << endl;
-    Info << "n_               : " << n_              << endl;
-    Info << "Tau_             : " << Tau_            << endl;
-    Info << "D1_              : " << D1_             << endl;
-    Info << "D2_              : " << D2_             << endl;
-    Info << "D3_              : " << D3_             << endl;
-    Info << "D3s_             : " << D3s_             << endl;
-    Info << "A1_              : " << A1_             << endl;
-    Info << "A2_              : " << A2_             << endl;
+    Info << "n                : " << n_              << endl;
+    Info << "Tau              : " << Tau_            << endl;
+    Info << "D1               : " << D1_             << endl;
+    Info << "D2               : " << D2_             << endl;
+    Info << "D3               : " << D3_             << endl;
+    Info << "D3s              : " << D3s_            << endl;
+    Info << "A1               : " << A1_             << endl;
+    Info << "A2               : " << A2_             << endl;
     Info << "Tab. Therm. Cond.  "                    << endl;
-    Info << "etaMin_          : " << etaMin_         << endl;
-    Info << "etaMax_          : " << etaMax_         << endl;
-    Info << "TnoFlow_         : " << TnoFlow_        << endl;
-    Info << "deltaTempInterp_ : " << deltaTempInterp_<< endl << endl;
+    Info << "etaMin           : " << etaMin_         << endl;
+    Info << "etaMax           : " << etaMax_         << endl;
+    Info << "TnoFlow          : " << TnoFlow_        << endl;
+    Info << "deltaTempInterp  : " << deltaTempInterp_<< endl;
+    Info << "crF              : " << crF_            << endl;
+    Info << "crH              : " << crH_            << endl;
+    Info << "crM              : " << crM_            << endl;
+    Info << "crUlt            : " << crUlt_          << endl << endl;
 }
 
 
@@ -113,6 +125,10 @@ void Foam::crossWLFTransportCr<Thermo>::write(Ostream& os) const
     dict.add("etaMax", etaMax_);
     dict.add("TnoFlow", TnoFlow_);
     dict.add("deltaTempInterp", deltaTempInterp_);
+    dict.add("crF", crF_);
+    dict.add("crH", crH_);
+    dict.add("crM", crM_);
+    dict.add("crUlt", crUlt_);
     os  << indent << dict.dictName() << dict;
 
     os  << decrIndent << token::END_BLOCK << nl;
@@ -140,6 +156,10 @@ Foam::Ostream& Foam::operator<<
     << tab << st.etaMax_
     << tab << st.TnoFlow_
     << tab << st.deltaTempInterp_ << endl;
+    << tab << st.crF_ << endl;
+    << tab << st.crH_ << endl;
+    << tab << st.crM_ << endl;
+    << tab << st.crUlt_ << endl;
 
     os.check
     (
