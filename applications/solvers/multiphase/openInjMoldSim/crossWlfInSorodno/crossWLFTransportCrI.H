@@ -215,9 +215,21 @@ inline Foam::scalar Foam::crossWLFTransportCr<Thermo>::mu
 {
     scalar crs = min(cr,1.0);
     crs = max(crs,0.0);
+    scalar crZero = 0.0001;
+    scalar visk;
 
-    scalar visk = pow(etaMax_, crs)
-                 *pow(mu(p, T, strig), 1-crs);//weighted avg in log space
+    if (cr > crZero)//safe division
+    {
+        visk = mu(p, T, strig)
+                 * (1 + crF_ * exp(-crH_/pow(cr * crUlt_, crM_)));
+
+        visk = min(visk, etaMax_);//trim to etaMax if greater
+
+    }
+    else
+    {
+        visk = mu(p, T, strig);
+    }
 
     return visk;
 }
