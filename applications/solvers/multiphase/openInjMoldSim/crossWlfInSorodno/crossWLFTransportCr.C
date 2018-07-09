@@ -155,10 +155,10 @@ Foam::Ostream& Foam::operator<<
     << tab << st.etaMin_
     << tab << st.etaMax_
     << tab << st.TnoFlow_
-    << tab << st.deltaTempInterp_ << endl;
-    << tab << st.crF_ << endl;
-    << tab << st.crH_ << endl;
-    << tab << st.crM_ << endl;
+    << tab << st.deltaTempInterp_ << endl
+    << tab << st.crF_ << endl
+    << tab << st.crH_ << endl
+    << tab << st.crM_ << endl
     << tab << st.crUlt_ << endl;
 
     os.check
