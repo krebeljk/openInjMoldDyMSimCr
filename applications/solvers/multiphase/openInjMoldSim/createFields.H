@@ -324,8 +324,8 @@ volScalarField zuFi2
         "zuFi2",
         runTime.timeName(),
         mesh,
-        IOobject::NO_READ,
-        IOobject::NO_WRITE
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
     )
     ,mesh
     ,dimensionedScalar("zuFi2init", dimensionSet(0,-2,0,0,0,0,0), 0.0)
@@ -338,8 +338,8 @@ volScalarField zuFi1
         "zuFi1",
         runTime.timeName(),
         mesh,
-        IOobject::NO_READ,
-        IOobject::NO_WRITE
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
     )
     ,mesh
     ,dimensionedScalar("zuFi1init", dimensionSet(0,-1,0,0,0,0,0), 0.0)
@@ -352,8 +352,8 @@ volScalarField zuFi0
         "zuFi0",
         runTime.timeName(),
         mesh,
-        IOobject::NO_READ,
-        IOobject::NO_WRITE
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
     )
     ,mesh
     ,dimensionedScalar("zuFi0init", dimensionSet(0,0,0,0,0,0,0), 0.0)
@@ -366,7 +366,7 @@ volScalarField zuCr // crystalline volume fraction
         "zuCr",
         runTime.timeName(),
         mesh,
-        IOobject::NO_READ,
+        IOobject::READ_IF_PRESENT,
         IOobject::AUTO_WRITE
     )
     ,mesh
@@ -381,7 +381,7 @@ volScalarField zuCrM // crystalline mass fraction
         "zuCrM",
         runTime.timeName(),
         mesh,
-        IOobject::NO_READ,
+        IOobject::READ_IF_PRESENT,
         IOobject::AUTO_WRITE
     )
     ,mesh
