@@ -74,9 +74,9 @@ Foam::crossWLFTransportCr<Thermo>::crossWLFTransportCr(const dictionary& dict)
     etaMax_(readScalar(dict.subDict("transport").lookup("etaMax"))),
     TnoFlow_(readScalar(dict.subDict("transport").lookup("TnoFlow"))),
     deltaTempInterp_(dict.subDict("transport").lookupOrDefault<scalar>("deltaTempInterp", 5.0)),
-    crF_(dict.subDict("transport").lookupOrDefault<scalar>("crF", 1e4)),
-    crH_(dict.subDict("transport").lookupOrDefault<scalar>("crH", 1.5)),
-    crM_(dict.subDict("transport").lookupOrDefault<scalar>("crM", 0.4)),
+    crF_(dict.subDict("transport").lookupOrDefault<scalar>("crF", 1e3)),
+    crH_(dict.subDict("transport").lookupOrDefault<scalar>("crH", 0.2)),
+    crM_(dict.subDict("transport").lookupOrDefault<scalar>("crM", 2.0)),
     crUlt_(dict.subDict("transport").lookupOrDefault<scalar>("crUlt", 0.66))
 {
     kappa_ = interpolation2DTable<scalar>("constant/kappaTableCr");
