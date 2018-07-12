@@ -62,7 +62,11 @@ inline Foam::crossWLFTransportCr<Thermo>::crossWLFTransportCr
     const scalar etaMin,
     const scalar etaMax,
     const scalar TnoFlow,
-    const scalar deltaTempInterp
+    const scalar deltaTempInterp,
+    const scalar crF,
+    const scalar crH,
+    const scalar crM,
+    const scalar crUlt
 )
 :
     Thermo(t),
@@ -77,7 +81,11 @@ inline Foam::crossWLFTransportCr<Thermo>::crossWLFTransportCr
     etaMin_(etaMin),
     etaMax_(etaMax),
     TnoFlow_(TnoFlow),
-    deltaTempInterp_(deltaTempInterp)
+    deltaTempInterp_(deltaTempInterp),
+    crF_(crF),
+    crH_(crH),
+    crM_(crM),
+    crUlt_(crUlt)
 {
     kappa_.outOfBounds(interpolation2DTable<scalar>::CLAMP);
 }
@@ -117,7 +125,11 @@ inline Foam::crossWLFTransportCr<Thermo>::crossWLFTransportCr
     etaMin_(st.etaMin_),
     etaMax_(st.etaMax_),
     TnoFlow_(st.TnoFlow),
-    deltaTempInterp_(st.deltaTempInterp)
+    deltaTempInterp_(st.deltaTempInterp),
+    crF_(st.crF),
+    crH_(st.crH),
+    crM_(st.crM),
+    crUlt_(st.crUlt)
 {
     kappa_.outOfBounds(interpolation2DTable<scalar>::CLAMP);
 }
@@ -203,9 +215,21 @@ inline Foam::scalar Foam::crossWLFTransportCr<Thermo>::mu
 {
     scalar crs = min(cr,1.0);
     crs = max(crs,0.0);
+    scalar crZero = 0.0001;
+    scalar visk;
 
-    scalar visk = pow(etaMax_, crs)
-                 *pow(mu(p, T, strig), 1-crs);//weighted avg in log space
+    if (cr > crZero)//safe division
+    {
+        visk = mu(p, T, strig)
+                 * (1 + crF_ * exp(-crH_/pow(cr * crUlt_, crM_)));
+
+        visk = min(visk, etaMax_);//trim to etaMax if greater
+
+    }
+    else
+    {
+        visk = mu(p, T, strig);
+    }
 
     return visk;
 }
@@ -258,6 +282,10 @@ Foam::crossWLFTransportCr<Thermo>::operator=
     etaMax_ = st.etaMax_;
     TnoFlow_ = st.TnoFlow_;
     deltaTempInterp_ = st.deltaTempInterp_;
+    crF_ = st.crF_;
+    crH_ = st.crH_;
+    crM_ = st.crM_;
+    crUlt_ = st.crUlt_;
 
     return *this;
 }

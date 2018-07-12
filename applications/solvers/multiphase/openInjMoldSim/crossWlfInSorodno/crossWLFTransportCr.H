@@ -103,6 +103,8 @@ class crossWLFTransportCr
         // crossWLF's coefficients
         scalar n_, Tau_, D1_, D2_, D3_, D3s_, A1_, A2_;
         scalar etaMin_, etaMax_, TnoFlow_, deltaTempInterp_;
+        // Titomanlio 1997 crystalline solidification params
+        scalar crF_, crH_, crM_, crUlt_;
 
 	// thermal conductivity [W/(Km)]
         interpolation2DTable<scalar> kappa_;
@@ -139,7 +141,11 @@ public:
             const scalar etaMin_,
             const scalar etaMax_,
             const scalar TnoFlow_,
-            const scalar deltaTempInterp_
+            const scalar deltaTempInterp_,
+            const scalar crF_,
+            const scalar crH_,
+            const scalar crM_,
+            const scalar crUlt_
         );
 
         //- Construct from two viscosities
