@@ -13,7 +13,7 @@
     // nucleation
     volScalarField zuNuc
     (
-        zuN0 * exp( (zuTm0N - zuT)/zuDelT0 )
+        zuN0 * exp( (zuTm0N - max(zuT, zuTNStop))/zuDelT0 )//freeze below zuTNStop
         * pos(zuTm0N - zuT) //inhibit above zuTm0N with N=0
     );
 

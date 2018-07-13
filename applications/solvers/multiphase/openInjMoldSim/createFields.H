@@ -302,6 +302,9 @@ Info<< "Reading crystPropDict properties\n" << endl;
     dimensionedScalar zuDelT0("zuDelT0", dimensionSet(0,0,0,1,0,0,0),
         cryDict.lookupOrDefault<scalar>("delT0", 2.5)
     ); //K
+    dimensionedScalar zuTNStop("zuTNStop", dimensionSet(0,0,0,1,0,0,0),
+        cryDict.lookupOrDefault<scalar>("TNStop", 333.15) // stop nucleation
+    ); //K
 
     //Ultimate crystallinity
     dimensionedScalar ultCryst("ultCryst", dimensionSet(0,0,0,0,0,0,0),
@@ -321,6 +324,7 @@ Info<< "Reading crystPropDict properties\n" << endl;
              << "N0: " << zuN0 << nl
              << "Tm0N: " << zuTm0N << nl
              << "delT0: " << zuDelT0 << nl
+             << "TNStop: " << zuTNStop << nl
              << "Ultimate crystallinity: " << ultCryst << nl
              << nl << endl;
     }
