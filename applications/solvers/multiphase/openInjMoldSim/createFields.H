@@ -312,13 +312,15 @@ Info<< "Reading crystPropDict properties\n" << endl;
     {
         // Summarise what's been read and print in the console
         Info << nl << "Crystallization properties: " << nl
-             << "Gmax: " << zuGmax << nl
-             << "Tref: " << zuTref << nl
+             << "G0: " << zuG0 << nl
              << "a: " << zua << nl
              << "pRef: " << zuPref << nl
-             << "beta: " << zuBeta << nl
-             << "N1: " << zuN1 << nl
-             << "N2: " << zuN2 << nl
+             << "ED: " << zuED << nl
+             << "C3: " << zuC3 << nl
+             << "Tm0G: " << zuTm0G << nl
+             << "N0: " << zuN0 << nl
+             << "Tm0N: " << zuTm0N << nl
+             << "delT0: " << zuDelT0 << nl
              << "Ultimate crystallinity: " << ultCryst << nl
              << nl << endl;
     }
