@@ -291,6 +291,7 @@ Info<< "Reading crystPropDict properties\n" << endl;
         cryDict.lookupOrDefault<scalar>("Tm0G", 419)
     ); //K
     dimensionedScalar zuR("zuR", dimensionSet(1,2,-2,-1,-1,0,0), 8.3144598); //J/(mol K) gas constant (should be taken form OpenFOAM)
+    dimensionedScalar zuDelTSafe("zuDelTSafe", dimensionSet(0,0,0,1,0,0,0), 5); //K ... divide with this instead of 0
 
     //Nucleation - params
     dimensionedScalar zuN0("zuN0", dimensionSet(0,-3,0,0,0,0,0),

@@ -7,7 +7,7 @@
     (
        zuG0
        * exp( - zuED /(zuR * zuT)
-              - zuC3 * zuTm0G/( zuT * (zuTm0G - zuT))
+              - zuC3 * zuTm0G/( zuT * max((zuTm0G - zuT), zuDelTSafe))
             )
     );
     // nucleation
