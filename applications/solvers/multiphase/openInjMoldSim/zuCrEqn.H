@@ -1,19 +1,20 @@
 {
 
     // growth rate
+    volScalarField zuT = T  - zua * (p - zuPref);// pressure shifted
+
     volScalarField zuGro
     (
-       zuGmax * 
-       exp( -2.0 *
-           sqr(
-              T - zuTref - zua * (p - zuPref)
-           )/zuBeta
-       ) 
+       zuG0
+       * exp( - zuED /(zuR * zuT)
+              - zuC3 * zuTm0G/( zuT * max((zuTm0G - zuT), zuDelTSafe))
+            )
     );
     // nucleation
     volScalarField zuNuc
     (
-        zuN1 * (T - twoSevenThree) + zuN2
+        zuN0 * exp( (zuTm0N - max(zuT, zuTNStop))/zuDelT0 )//freeze below zuTNStop
+        * pos(zuTm0N - zuT) //inhibit above zuTm0N with N=0
     );
 
     // fi2

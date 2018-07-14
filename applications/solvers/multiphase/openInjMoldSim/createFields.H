@@ -246,7 +246,6 @@ Info<< "Reading solidification properties\n" << endl;
     );
 
 //Crystallinity
-//Zuidema 2001
 Info<< "Reading crystPropDict properties\n" << endl;
     const word cryDictName("crystPropDict");
 
@@ -264,7 +263,7 @@ Info<< "Reading crystPropDict properties\n" << endl;
     if (!cryDictIO.headerOk())
     {
         Info << "No constant/crystPropDict dictionary found." << endl;
-        Info << "Defaulting to Zuidema 2001 parameters of crystallization." << nl << nl << endl;
+        Info << "Defaulting to HDPE parameters of crystallization." << nl << nl << endl;
     }
 
     // Get access to the dictionary
@@ -273,28 +272,40 @@ Info<< "Reading crystPropDict properties\n" << endl;
     cryDict = IOdictionary(cryDictIO);
 
     //Growth rate - params
-    dimensionedScalar zuGmax("zuGmax", dimensionSet(0,1,-1,0,0,0,0),
-        cryDict.lookupOrDefault<scalar>("Gmax", 8.1e-6)
+    dimensionedScalar zuG0("zuG0", dimensionSet(0,1,-1,0,0,0,0),
+        cryDict.lookupOrDefault<scalar>("G0", 1e3)
     ); //m/s
-    dimensionedScalar zuTref("zuTref", dimensionSet(0,0,0,1,0,0,0),
-        cryDict.lookupOrDefault<scalar>("Tref", 356.8)
-    ); //K
     dimensionedScalar zua("zua", dimensionSet(-1,1,2,1,0,0,0),
-        cryDict.lookupOrDefault<scalar>("a", 5e-7)
+        cryDict.lookupOrDefault<scalar>("a", 1.543e-7)
     ); //K/Pa
     dimensionedScalar zuPref("zuPref", dimensionSet(1,-1,-2,0,0,0,0),
         cryDict.lookupOrDefault<scalar>("pRef", 1e5)
     ); //Pa
-    dimensionedScalar zuBeta("zuBeta", dimensionSet(0,0,0,2,0,0,0),
-        cryDict.lookupOrDefault<scalar>("beta", 1126.9)
-    ); //K2
+    dimensionedScalar zuED("zuED", dimensionSet(1,2,-2,0,-1,0,0),
+        cryDict.lookupOrDefault<scalar>("ED", 29.3e3)
+    ); //J/(mol K)
+    dimensionedScalar zuC3("zuC3", dimensionSet(0,0,0,1,0,0,0),
+        cryDict.lookupOrDefault<scalar>("C3", 265)
+    ); //K
+    dimensionedScalar zuTm0G("zuTm0G", dimensionSet(0,0,0,1,0,0,0),
+        cryDict.lookupOrDefault<scalar>("Tm0G", 419)
+    ); //K
+    dimensionedScalar zuR("zuR", dimensionSet(1,2,-2,-1,-1,0,0), 8.3144598); //J/(mol K) gas constant (should be taken form OpenFOAM)
+    dimensionedScalar zuDelTSafe("zuDelTSafe", dimensionSet(0,0,0,1,0,0,0), 5); //K ... divide with this instead of 0
+
     //Nucleation - params
-    dimensionedScalar zuN1("zuN1", dimensionSet(0,-3,0,-1,0,0,0),
-        cryDict.lookupOrDefault<scalar>("N1", -2.6087e13)
-    ); //K^-1 m^-3
-    dimensionedScalar zuN2("zuN2", dimensionSet(0,-3,0,0,0,0,0),
-        cryDict.lookupOrDefault<scalar>("N2", 6.5783e15)
+    dimensionedScalar zuN0("zuN0", dimensionSet(0,-3,0,0,0,0,0),
+        cryDict.lookupOrDefault<scalar>("N0", 1e8)
     ); //m^-3
+    dimensionedScalar zuTm0N("zuTm0N", dimensionSet(0,0,0,1,0,0,0),
+        cryDict.lookupOrDefault<scalar>("Tm0N", 419)
+    ); //K
+    dimensionedScalar zuDelT0("zuDelT0", dimensionSet(0,0,0,1,0,0,0),
+        cryDict.lookupOrDefault<scalar>("delT0", 2.5)
+    ); //K
+    dimensionedScalar zuTNStop("zuTNStop", dimensionSet(0,0,0,1,0,0,0),
+        cryDict.lookupOrDefault<scalar>("TNStop", 333.15) // stop nucleation
+    ); //K
 
     //Ultimate crystallinity
     dimensionedScalar ultCryst("ultCryst", dimensionSet(0,0,0,0,0,0,0),
@@ -305,13 +316,16 @@ Info<< "Reading crystPropDict properties\n" << endl;
     {
         // Summarise what's been read and print in the console
         Info << nl << "Crystallization properties: " << nl
-             << "Gmax: " << zuGmax << nl
-             << "Tref: " << zuTref << nl
+             << "G0: " << zuG0 << nl
              << "a: " << zua << nl
              << "pRef: " << zuPref << nl
-             << "beta: " << zuBeta << nl
-             << "N1: " << zuN1 << nl
-             << "N2: " << zuN2 << nl
+             << "ED: " << zuED << nl
+             << "C3: " << zuC3 << nl
+             << "Tm0G: " << zuTm0G << nl
+             << "N0: " << zuN0 << nl
+             << "Tm0N: " << zuTm0N << nl
+             << "delT0: " << zuDelT0 << nl
+             << "TNStop: " << zuTNStop << nl
              << "Ultimate crystallinity: " << ultCryst << nl
              << nl << endl;
     }
