@@ -81,51 +81,6 @@ dimensionedScalar pMin
 );
 
 mesh.setFluxRequired(p_rgh.name());
-//kristjan - za HTC
-
-volScalarField mojKappaOut
-(
-    IOobject
-    (
-        "mojKappaOut",
-        runTime.timeName(),
-        mesh,
-        IOobject::NO_READ,
-        IOobject::NO_WRITE
-    ),
-    mixture.kappa()
-);
-
-//kristjan - pregled viskoznosti
-
-volScalarField visc
-(
-    IOobject
-    (
-        "visc",
-        runTime.timeName(),
-        mesh,
-        IOobject::NO_READ,
-        IOobject::AUTO_WRITE
-    ),
-    alpha1*mixture.thermo1().mu() + alpha2*mixture.thermo2().mu()
-);
-
-//kristjan - residuals p_rgh
-
-volScalarField p_rgh_resid
-(
-    IOobject
-    (
-        "p_rgh_resid",
-        runTime.timeName(),
-        mesh,
-        IOobject::NO_READ,
-        IOobject::AUTO_WRITE
-    ),
-    mesh,
-    dimensionedScalar("initOne", dimensionSet(0,0,-1,0,0,0,0), 1.0)
-);
 
 //kristjan - Calc Celsius
 volScalarField Tc
@@ -401,4 +356,53 @@ volScalarField zuCrM // crystalline mass fraction
     ,mesh
     ,dimensionedScalar("zuCrM", dimensionSet(0,0,0,0,0,0,0), 0.0)
     ,"zeroGradient"
+);
+
+crPolyV = zuCr; //transfer vol-crystallinity to thermo
+mixture.correct(); //thermo calcs its mass-cr, rho, mu, kappa etc.
+
+//kristjan - za HTC
+
+volScalarField mojKappaOut
+(
+    IOobject
+    (
+        "mojKappaOut",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::NO_WRITE
+    ),
+    mixture.kappa()
+);
+
+//kristjan - pregled viskoznosti
+
+volScalarField visc
+(
+    IOobject
+    (
+        "visc",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::AUTO_WRITE
+    ),
+    alpha1*mixture.thermo1().mu() + alpha2*mixture.thermo2().mu()
+);
+
+//kristjan - residuals p_rgh
+
+volScalarField p_rgh_resid
+(
+    IOobject
+    (
+        "p_rgh_resid",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::AUTO_WRITE
+    ),
+    mesh,
+    dimensionedScalar("initOne", dimensionSet(0,0,-1,0,0,0,0), 1.0)
 );
