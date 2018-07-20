@@ -245,6 +245,9 @@ Info<< "Reading crystPropDict properties\n" << endl;
     dimensionedScalar zuTm0G("zuTm0G", dimensionSet(0,0,0,1,0,0,0),
         cryDict.lookupOrDefault<scalar>("Tm0G", 419)
     ); //K
+    dimensionedScalar zuGretard("zuGretard", dimensionSet(0,0,0,0,0,0,0),
+        cryDict.lookupOrDefault<scalar>("Gretard", 0.0)
+    ); //K
     dimensionedScalar zuR("zuR", dimensionSet(1,2,-2,-1,-1,0,0), 8.3144598); //J/(mol K) gas constant (should be taken form OpenFOAM)
     dimensionedScalar zuDelTSafe("zuDelTSafe", dimensionSet(0,0,0,1,0,0,0), 5); //K ... divide with this instead of 0
 
@@ -277,6 +280,7 @@ Info<< "Reading crystPropDict properties\n" << endl;
              << "ED: " << zuED << nl
              << "C3: " << zuC3 << nl
              << "Tm0G: " << zuTm0G << nl
+             << "Gretard: " << zuGretard << nl
              << "N0: " << zuN0 << nl
              << "Tm0N: " << zuTm0N << nl
              << "delT0: " << zuDelT0 << nl
