@@ -8,6 +8,7 @@
        zuG0
        * exp( - zuED /(zuR * zuT)
               - zuC3 * zuTm0G/( zuT * max((zuTm0G - zuT), zuDelTSafe))
+              - zuGretard * zuCr //empirical growth impingement // Mandelkern discussed //Skg_03_05_E_07_09_03
             )
     );
     // nucleation
