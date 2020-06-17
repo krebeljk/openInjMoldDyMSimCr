@@ -111,15 +111,17 @@ int main(int argc, char *argv[])
 
             #include "zuCrEqn.H"
 
-            #include "UEqn.H"
             strig = sqrt(2.0*symm(fvc::grad(U))&&symm(fvc::grad(U)));
             shrRate = strig;
+            mixture.correct();
+            #include "UEqn.H"
+
+            mojKappaOut = mixture.kappa();
             #include "TEqn.H"
 
             // --- Pressure corrector loop
             while (pimple.correct())
             {
-                mojKappaOut = mixture.kappa();
                 #include "pEqn.H"
             }
 
