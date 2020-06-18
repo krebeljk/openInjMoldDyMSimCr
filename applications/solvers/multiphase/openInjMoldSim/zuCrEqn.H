@@ -23,7 +23,7 @@
     (
         fvm::ddt(zuFi2)
       + fvm::div(phi, zuFi2)
-      - fvc::div(U) * zuFi2
+      + fvm::SuSp(-fvc::div(phi), zuFi2)
       - 8.0 * constant::mathematical::pi
         * zuGro * zuNuc
         * pos(0.9999 - zuCr) //stop at cr=1
@@ -38,7 +38,7 @@
     (
         fvm::ddt(zuFi1)
       + fvm::div(phi, zuFi1)
-      - fvc::div(U) * zuFi1
+      + fvm::SuSp(-fvc::div(phi), zuFi1)
       - zuFi2 * zuGro
         * pos(0.9999 - zuCr) //stop at cr=1
         * pos(alpha1 - 0.9) //only for poly
@@ -52,7 +52,7 @@
     (
         fvm::ddt(zuFi0)
       + fvm::div(phi, zuFi0)
-      - fvc::div(U) * zuFi0
+      + fvm::SuSp(-fvc::div(phi), zuFi0)
       - zuFi1 * zuGro
         * pos(0.9999 - zuCr) //stop at cr=1
         * pos(alpha1 - 0.9) //only for poly
