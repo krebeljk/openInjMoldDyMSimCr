@@ -95,14 +95,19 @@ int main(int argc, char *argv[])
             //Kristjan: Elastic deviatoric stress equation
             if (sldDictIO.headerOk())
             {
+                volScalarField sigSmStop1 = -(shrRateLimEl-shrRate)/(1e-3*shrRateLimEl)
+                sigSmStop1 = min(max(sigSmStop1 ,0.0),1.0);
+                volScalarField sigSmStop2 = -(visc-viscLimEl)/(1e-3*viscLimEl)
+                sigSmStop2 = min(max(sigSmStop2 ,0.0),1.0);
+
                 fvSymmTensorMatrix elSigDevEqn(
                   fvm::ddt(elSigDev)
                 + fvm::div(phi,elSigDev)
                   ==
                   twoSymm(elSigDev & fvc::grad(U))
                 + shrMod * dev(twoSymm(fvc::grad(U)))
-                  * pos(shrRateLimEl-shrRate)
-                  * pos(visc-viscLimEl)
+                  * sigSmStop1
+                  * sigSmStop2
                 );
                 elSigDevEqn.relax();
                 elSigDevEqn.solve();
