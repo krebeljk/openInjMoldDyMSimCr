@@ -3,7 +3,7 @@
     // growth rate
     volScalarField zuT = T  - zua * (p - zuPref);// pressure shifted
 
-    volScalarField smoothStop = -(zuCr-0.9999)/(1.0-0.9999);//ramp down final cry rate before cr=1 (that cant be reached)
+    volScalarField smoothStop = -(zuCr-0.99)/(1.0-0.99);//ramp down final cry rate before cr=1 (that cant be reached)
     smoothStop = min(max(smoothStop,0.0),1.0);
 
     volScalarField zuGro
