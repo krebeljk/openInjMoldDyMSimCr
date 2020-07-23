@@ -5,7 +5,7 @@
 
     volScalarField smoothStop1 = -(zuCr-0.99)/0.01;//ramp down final cry rate before cr=1 (that cant be reached)
     smoothStop1 = min(max(smoothStop1,0.0),1.0);
-    volScalarField smoothStop2 = -(alpha1-0.9)/0.01;//ramp down final cry rate before cr=1 (that cant be reached)
+    volScalarField smoothStop2 = (alpha1-0.9)/0.01;//only for poly
     smoothStop2 = min(max(smoothStop2,0.0),1.0);
 
     volScalarField zuGro
