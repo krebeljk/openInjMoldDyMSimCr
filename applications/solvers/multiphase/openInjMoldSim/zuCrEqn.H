@@ -3,8 +3,10 @@
     // growth rate
     volScalarField zuT = T  - zua * (p - zuPref);// pressure shifted
 
-    volScalarField smoothStop = -(zuCr-0.99)/(1.0-0.99);//ramp down final cry rate before cr=1 (that cant be reached)
-    smoothStop = min(max(smoothStop,0.0),1.0);
+    volScalarField smoothStop1 = -(zuCr-0.99)/0.01;//ramp down final cry rate before cr=1 (that cant be reached)
+    smoothStop1 = min(max(smoothStop1,0.0),1.0);
+    volScalarField smoothStop2 = -(alpha1-0.9)/0.01;//ramp down final cry rate before cr=1 (that cant be reached)
+    smoothStop2 = min(max(smoothStop2,0.0),1.0);
 
     volScalarField zuGro
     (
@@ -13,8 +15,8 @@
               - zuC3 * zuTm0G/( zuT * max((zuTm0G - zuT), zuDelTSafe))
               - zuGretard * zuCr //empirical growth impingement // Mandelkern discussed //Skg_03_05_E_07_09_03
             )
-        * smoothStop //stop at cr=1
-        * pos(alpha1 - 0.9) //only for poly
+        * smoothStop1 //stop at cr=1
+        * smoothStop2  //only for poly
     );
     // nucleation
     volScalarField zuNuc
