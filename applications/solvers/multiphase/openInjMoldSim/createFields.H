@@ -410,3 +410,19 @@ volScalarField p_rgh_resid
     mesh,
     dimensionedScalar("initOne", dimensionSet(0,0,-1,0,0,0,0), 1.0)
 );
+
+
+// pressure preventing material collapse bellow pMin
+volScalarField pAux
+(
+    IOobject
+    (
+        "pAux",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+    ),
+    mesh,
+    dimensionedScalar("zeropAux", dimPressure, 0.0)
+);
