@@ -1,6 +1,12 @@
 EXE_INC = \
     -I.. \
-    -I../twoPhaseMixtureThermo \
+    -I../mojTwoPhaseMixtureThermo \
+    -I../crossWlfInSorodno \
+    -I../mojConstTransport \
+    -I../mojTurbulentFluidThermoModel \
+    -I../polymerPVT \
+    -I../CfdOL/hTabular\
+    -I../mojThermo \
     -I$(LIB_SRC)/transportModels/compressible/lnInclude \
     -I$(LIB_SRC)/thermophysicalModels/basic/lnInclude \
     -I$(LIB_SRC)/transportModels/twoPhaseMixture/lnInclude \
@@ -13,7 +19,6 @@ EXE_INC = \
     -I$(LIB_SRC)/finiteVolume/lnInclude
 
 EXE_LIBS = \
-    -ltwoPhaseMixtureThermo \
     -lcompressibleTransportModels \
     -lfluidThermophysicalModels \
     -lspecie \

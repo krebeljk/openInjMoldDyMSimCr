@@ -1,3 +1,10 @@
+../mojThermos.C
+../mojTwoPhaseMixtureThermo/mojTwoPhaseMixtureThermo.C
+../crossWlfInSorodno/mojRhoThermo.C
+../crossWlfInSorodno/mojFluidThermo.C
+../crossWlfInSorodno/mojBasicThermo.C
+../mojTwoPhaseMixtureThermo/mojPsiThermo.C
+../mojTurbulentFluidThermoModel/mojTurbulentFluidThermoModels.C
 compressibleInterDyMFoam.C
 
 EXE = $(FOAM_APPBIN)/openInjMoldDyMSimFimacBaa
