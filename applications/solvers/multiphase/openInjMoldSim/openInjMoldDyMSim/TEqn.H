@@ -11,13 +11,16 @@
       - T * mixture.cTExp()
         * (
             fvc::ddt(p)
-          + (U & fvc::grad(p))
+          + fvc::div(phi, p)
+          - fvc::div(phi) * p
           )// Dp/Dt
       - rho1*alpha1
        *ultCryst*mixture.thermo1().Hfus()//Latent heat
         * (
             fvc::ddt(zuCrM)
-          + (U & fvc::grad(zuCrM))
+          + fvm::div(phi, zuCrM)
+          - fvc::div(phi) * zuCrM
+
           )// Dcr/Dt
     );
 
