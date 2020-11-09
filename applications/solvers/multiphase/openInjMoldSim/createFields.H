@@ -289,6 +289,20 @@ volScalarField zuFi2
     ,dimensionedScalar("zuFi2init", dimensionSet(0,-2,0,0,0,0,0), 0.0)
     ,"zeroGradient"
 );
+volScalarField zuFi2r
+(
+    IOobject
+    (
+        "zuFi2r",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+    )
+    ,mesh
+    ,dimensionedScalar("zuFi2init", dimensionSet(0,-2,-1,0,0,0,0), 0.0)
+    ,"zeroGradient"
+);
 volScalarField zuFi1
 (
     IOobject

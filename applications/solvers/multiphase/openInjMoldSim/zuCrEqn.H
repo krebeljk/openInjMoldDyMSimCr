@@ -29,6 +29,14 @@
     );
 
     // fi2
+    zuFi2r = 
+    (
+        fvc::ddt(zuFi2)
+      + fvc::div(phi, zuFi2)
+      + fvc::SuSp(-fvc::div(phi), zuFi2)
+      - 8.0 * constant::mathematical::pi
+        * zuGro * zuNuc
+    );
     fvScalarMatrix zuFi2eq
     (
         fvm::ddt(zuFi2)
