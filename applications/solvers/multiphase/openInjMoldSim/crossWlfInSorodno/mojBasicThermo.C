@@ -181,18 +181,7 @@ Foam::mojBasicThermo::mojBasicThermo
 
     p_(lookupOrConstruct(mesh, "p")),
 
-    T_
-    (
-        IOobject
-        (
-            phasePropertyName("T"),
-            mesh.time().timeName(),
-            mesh,
-            IOobject::MUST_READ,
-            IOobject::AUTO_WRITE
-        ),
-        mesh
-    ),
+    T_(lookupOrConstruct(mesh, "T")),
 
     shrRate_(lookupOrConstruct(mesh, "shrRate")),
 
@@ -241,18 +230,7 @@ Foam::mojBasicThermo::mojBasicThermo
 
     p_(lookupOrConstruct(mesh, "p")),
 
-    T_
-    (
-        IOobject
-        (
-            phasePropertyName("T"),
-            mesh.time().timeName(),
-            mesh,
-            IOobject::MUST_READ,
-            IOobject::AUTO_WRITE
-        ),
-        mesh
-    ),
+    T_(lookupOrConstruct(mesh, "T")),
 
     shrRate_(lookupOrConstruct(mesh, "shrRate")),
 
