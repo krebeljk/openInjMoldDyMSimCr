@@ -380,23 +380,6 @@ volScalarField visc
     alpha1*mixture.thermo1().mu() + alpha2*mixture.thermo2().mu()
 );
 
-//kristjan - residuals p_rgh
-
-volScalarField p_rgh_resid
-(
-    IOobject
-    (
-        "p_rgh_resid",
-        runTime.timeName(),
-        mesh,
-        IOobject::NO_READ,
-        IOobject::AUTO_WRITE
-    ),
-    mesh,
-    dimensionedScalar("initOne", dimensionSet(0,0,-1,0,0,0,0), 1.0)
-);
-
-
 // pressure preventing material collapse bellow pMin
 volScalarField pAux
 (
