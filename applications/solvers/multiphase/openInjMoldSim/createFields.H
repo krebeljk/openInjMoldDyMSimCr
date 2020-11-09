@@ -38,7 +38,7 @@ Info<< "Reading thermophysical properties\n" << endl;
 
 volScalarField& p = mixture.p();
 volScalarField& T = mixture.T();
-volScalarField& shrRate = mixture.thermo1().shrRate();
+volScalarField& shrRate = mixture.shrRate();
 volScalarField& crPolyV = mixture.thermo1().crV();//reference to rel cry field of poly
 volScalarField& crPolyM = mixture.thermo1().cr();//reference to rel cry field of poly
 volScalarField& rho1 = mixture.thermo1().rho();
