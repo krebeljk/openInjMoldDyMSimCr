@@ -67,8 +67,6 @@ int main(int argc, char *argv[])
     Info<< "\nStarting time loop\n" << endl;
 
 
-    shrRate.write();
-
     while (runTime.run())
     {
         #include "createTimeControls.H"
