@@ -7,7 +7,7 @@
           + fvm::div(rhoPhi, T)
         )
       - fvm::laplacian(mixture.kappa(), T)
-      - mixture.mu() * pow(strig,2)///viscous heating
+      - mixture.mu() * pow(shrRate,2)///viscous heating
       - T * mixture.cTExp()
         * (
             fvc::ddt(p)

@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
     Info<< "\nStarting time loop\n" << endl;
 
 
-    strig.write();
+    shrRate.write();
 
     while (runTime.run())
     {
@@ -116,7 +116,7 @@ int main(int argc, char *argv[])
 
             #include "zuCrEqn.H"
 
-            strig = sqrt(2.0*symm(fvc::grad(U))&&symm(fvc::grad(U)));
+            shrRate = sqrt(2.0*symm(fvc::grad(U))&&symm(fvc::grad(U)));
             mixture.correct();
             #include "UEqn.H"
 

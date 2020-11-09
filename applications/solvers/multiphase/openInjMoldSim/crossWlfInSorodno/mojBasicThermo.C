@@ -194,7 +194,7 @@ Foam::mojBasicThermo::mojBasicThermo
         mesh
     ),
 
-    strig_(lookupOrConstruct(mesh, "strig")),
+    shrRate_(lookupOrConstruct(mesh, "shrRate")),
 
     alpha_
     (
@@ -254,7 +254,7 @@ Foam::mojBasicThermo::mojBasicThermo
         mesh
     ),
 
-    strig_(lookupOrConstruct(mesh, "strig")),
+    shrRate_(lookupOrConstruct(mesh, "shrRate")),
 
     alpha_
     (
@@ -482,14 +482,14 @@ const Foam::volScalarField& Foam::mojBasicThermo::p() const
 }
 
 
-Foam::volScalarField& Foam::mojBasicThermo::strig()
+Foam::volScalarField& Foam::mojBasicThermo::shrRate()
 {
-    return strig_;
+    return shrRate_;
 }
 
-const Foam::volScalarField& Foam::mojBasicThermo::strig() const
+const Foam::volScalarField& Foam::mojBasicThermo::shrRate() const
 {
-    return strig_;
+    return shrRate_;
 }
 
 const Foam::volScalarField& Foam::mojBasicThermo::T() const

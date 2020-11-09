@@ -32,7 +32,7 @@ void Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::calculate()
 {
     //const scalarField& hCells = this->he().internalField(); //Kristjan: governed by TEqn
     const scalarField& pCells = this->p_.internalField();
-    const scalarField& strigCells = this->strig_.internalField();
+    const scalarField& shrRateCells = this->shrRate_.internalField();
 
     scalarField& TCells = this->T_.internalField();
     scalarField& psiCells = this->psi_.internalField();
@@ -66,7 +66,7 @@ void Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::calculate()
 
         muCells[celli] = mixture_.mu(pCells[celli]
                                    , TCells[celli]
-                                   , strigCells[celli]
+                                   , shrRateCells[celli]
                                    , crCells[celli]
                                    );
 
@@ -77,10 +77,10 @@ void Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::calculate()
     {
         fvPatchScalarField& pp = this->p_.boundaryField()[patchi];
         fvPatchScalarField& pT = this->T_.boundaryField()[patchi];
-        fvPatchScalarField& pstrig = this->strig_.boundaryField()[patchi];
+        fvPatchScalarField& pshrRate = this->shrRate_.boundaryField()[patchi];
         fvPatchScalarField& pcrV = this->crV_.boundaryField()[patchi];
         fvPatchScalarField& pcr = this->cr_.boundaryField()[patchi];
-        //fvPatchScalarField& pU = strig.boundaryField()[patchi]; // tukaj boundary
+        //fvPatchScalarField& pU = shrRate.boundaryField()[patchi]; // tukaj boundary
 
         fvPatchScalarField& ppsi = this->psi_.boundaryField()[patchi];
         fvPatchScalarField& prho = this->rho_.boundaryField()[patchi];
@@ -112,7 +112,7 @@ void Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::calculate()
                 prho[facei] = mixture_.rho(pp[facei], pT[facei], pcr[facei]);
                 pmu[facei] = mixture_.mu(pp[facei]
                                        , pT[facei]
-                                       , pstrig[facei]
+                                       , pshrRate[facei]
                                        , pcr[facei]
                                        );
                 palpha[facei] = mixture_.alphah(pp[facei], pT[facei]);
@@ -139,7 +139,7 @@ void Foam::mojCrHeRhoThermo<BasicPsiThermo, MixtureType>::calculate()
                 prho[facei] = mixture_.rho(pp[facei], pT[facei], pcr[facei]);
                 pmu[facei] = mixture_.mu(pp[facei]
                                        , pT[facei]
-                                       , pstrig[facei]
+                                       , pshrRate[facei]
                                        , pcr[facei]
                                        );
                 palpha[facei] = mixture_.alphah(pp[facei], pT[facei]);

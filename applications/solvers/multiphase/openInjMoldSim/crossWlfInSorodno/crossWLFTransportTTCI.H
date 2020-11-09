@@ -169,16 +169,16 @@ inline Foam::scalar Foam::crossWLFTransportTTC<Thermo>::mu
 (
     const scalar p,
     const scalar T,
-    const scalar strig
+    const scalar shrRate
 ) const
 {
     scalar TnoFlowS = TnoFlow_ + D3s_ * p;
     if (T < TnoFlowS) { return etaMax_; } //leave immediately to avoid n0 = infinite
     const scalar n0 = D1_*::exp(-(A1_*(T-D2_-D3_*p))/(A2_+T-D2_));
-    scalar visk = n0/(1.0+pow(n0*strig/Tau_,1.0-n_));
+    scalar visk = n0/(1.0+pow(n0*shrRate/Tau_,1.0-n_));
     scalar Tstart = TnoFlowS + deltaTempInterp_; //solidification onset temperature .. D3s*p from TnoFlowS
 
-    //Info << "visk= " << visk  << " p=" << p << " T=" << T << " strig=" << strig << endl;   // debug Kristjan
+    //Info << "visk= " << visk  << " p=" << p << " T=" << T << " shrRate=" << shrRate << endl;   // debug Kristjan
 
     if (visk > etaMax_) { visk = etaMax_; }
     if (visk < etaMin_) { visk = etaMin_; }

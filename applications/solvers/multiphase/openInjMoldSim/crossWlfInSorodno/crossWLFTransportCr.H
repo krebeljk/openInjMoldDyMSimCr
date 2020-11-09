@@ -184,10 +184,10 @@ public:
         }
 
         //- Dynamic viscosity [kg/ms]
-        inline scalar mu(const scalar p, const scalar T, const scalar strig) const;
+        inline scalar mu(const scalar p, const scalar T, const scalar shrRate) const;
 
         //- Dynamic viscosity [kg/ms]
-        inline scalar mu(const scalar p, const scalar T, const scalar strig, const scalar cr) const;
+        inline scalar mu(const scalar p, const scalar T, const scalar shrRate, const scalar cr) const;
 
         //- Thermal conductivity [W/mK]
         inline scalar kappa(const scalar p, const scalar cr) const;
