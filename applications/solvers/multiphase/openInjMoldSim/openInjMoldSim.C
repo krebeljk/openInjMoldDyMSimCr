@@ -90,6 +90,12 @@ int main(int argc, char *argv[])
 
             solve(fvm::ddt(rho) + fvc::div(rhoPhi));
 
+            // Update state before solid
+            shrRate = sqrt(2.0*symm(fvc::grad(U))&&symm(fvc::grad(U)));
+            mixture.correct();
+            visc = mixture.mu();
+            mojKappaOut = mixture.kappa();
+
             //Kristjan: Elastic deviatoric stress equation
             if (sldDictIO.headerOk())
             {
@@ -114,11 +120,8 @@ int main(int argc, char *argv[])
 
             #include "zuCrEqn.H"
 
-            shrRate = sqrt(2.0*symm(fvc::grad(U))&&symm(fvc::grad(U)));
-            mixture.correct();
             #include "UEqn.H"
 
-            mojKappaOut = mixture.kappa();
             #include "TEqn.H"
 
             // --- Pressure corrector loop
@@ -127,8 +130,6 @@ int main(int argc, char *argv[])
                 #include "pEqn.H"
             }
 
-            // visc - kristjan
-            visc = alpha1*mixture.thermo1().mu() + alpha2*mixture.thermo2().mu(); 
 
             if (pimple.turbCorr())
             {
