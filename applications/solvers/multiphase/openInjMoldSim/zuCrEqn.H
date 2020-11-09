@@ -7,6 +7,9 @@
     smoothStop1 = min(max(smoothStop1,0.0),1.0);
     volScalarField smoothStop2 = (alpha1-0.9)/0.03;//only for poly
     smoothStop2 = min(max(smoothStop2,0.0),1.0);
+    dimensionedScalar TrampN("TrampN", dimensionSet(0,0,0,1,0,0,0), 3.0);
+    volScalarField smoothStop3 = -(zuT - zuTm0N)/TrampN;//only for poly
+    smoothStop3 = min(max(smoothStop3,0.0),1.0);
 
     volScalarField zuGro
     (
@@ -22,7 +25,7 @@
     volScalarField zuNuc
     (
         zuN0 * exp( (zuTm0N - max(zuT, zuTNStop))/zuDelT0 )//freeze below zuTNStop
-        * pos(zuTm0N - zuT) //inhibit above zuTm0N with N=0
+        * smoothStop3  //inhibit above zuTm0N with N=0
     );
 
     // fi2
