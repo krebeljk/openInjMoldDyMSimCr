@@ -26,19 +26,6 @@ volVectorField U
     mesh
 );
 
-volScalarField shrRate
-(
-    IOobject
-    (
-        "shrRate",
-        runTime.timeName(),
-        mesh,
-        IOobject::NO_READ,
-        IOobject::AUTO_WRITE
-    ),
-    sqrt(2.0*symm(fvc::grad(U))&&symm(fvc::grad(U)))
-);
-
 #include "createPhi.H"
 
 Info<< "Constructing mojTwoPhaseMixtureThermo\n" << endl;
