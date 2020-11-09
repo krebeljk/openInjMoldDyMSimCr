@@ -70,6 +70,7 @@ dimensionedScalar pMin
 mesh.setFluxRequired(p_rgh.name());
 
 //kristjan - Calc Celsius
+dimensionedScalar twoSevenThree("twoSevenThree", dimensionSet(0,0,0,1,0,0,0), 273.15);
 volScalarField Tc
 (
     IOobject
@@ -77,14 +78,11 @@ volScalarField Tc
         "Tc",
         runTime.timeName(),
         mesh,
-        IOobject::NO_READ,
+        IOobject::READ_IF_PRESENT,
         IOobject::AUTO_WRITE
     ),
-    mesh,
-    dimensionedScalar("initTc", dimensionSet(0,0,0,1,0,0,0), 0.0)
+    T - twoSevenThree
 );
-dimensionedScalar twoSevenThree("twoSevenThree", dimensionSet(0,0,0,1,0,0,0), 273.15);
-Tc = T - twoSevenThree;
 
 #include "readGravitationalAcceleration.H"
 #include "readhRef.H"
@@ -376,7 +374,7 @@ volScalarField visc
         "visc",
         runTime.timeName(),
         mesh,
-        IOobject::NO_READ,
+        IOobject::READ_IF_PRESENT,
         IOobject::AUTO_WRITE
     ),
     alpha1*mixture.thermo1().mu() + alpha2*mixture.thermo2().mu()
