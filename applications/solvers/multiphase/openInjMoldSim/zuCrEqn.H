@@ -10,6 +10,7 @@
     dimensionedScalar TrampN("TrampN", dimensionSet(0,0,0,1,0,0,0), 3.0);
     volScalarField smoothStop3 = -(zuT - zuTm0N)/TrampN;//only for poly
     smoothStop3 = min(max(smoothStop3,0.0),1.0);
+    volScalarField smoothStop = smoothStop1 * smoothStop2 * smoothStop3;//total
 
     volScalarField zuGro
     (
@@ -18,14 +19,13 @@
               - zuC3 * zuTm0G/( zuT * max((zuTm0G - zuT), zuDelTSafe))
               - zuGretard * zuCr //empirical growth impingement // Mandelkern discussed //Skg_03_05_E_07_09_03
             )
-        * smoothStop1 //stop at cr=1
-        * smoothStop2  //only for poly
     );
     // nucleation
     volScalarField zuNuc
     (
-        zuN0 * exp( (zuTm0N - max(zuT, zuTNStop))/zuDelT0 )//freeze below zuTNStop
-        * smoothStop3  //inhibit above zuTm0N with N=0
+        zuN0 * exp( (zuTm0N - max(zuT, zuTNStop))/zuDelT0 //freeze below zuTNStop
+        * smoothStop //exponent to zero
+        ) * smoothStop  // 1 to zero
     );
 
     // fi2
