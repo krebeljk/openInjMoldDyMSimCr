@@ -64,8 +64,8 @@ int main(int argc, char *argv[])
     #include "createFields.H"
     #include "createUf.H"
     #include "createControls.H"
-    #include "CourantNo.H"
-    #include "setInitialDeltaT.H"
+    #include "mojCourantNo.H"
+    #include "mojSetInitialDeltaT.H"
 
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -82,8 +82,8 @@ int main(int argc, char *argv[])
             // same divergence
             volScalarField divU("divU0", fvc::div(fvc::absolute(phi, U)));
 
-            #include "CourantNo.H"
-            #include "setDeltaT.H"
+            #include "mojCourantNo.H"
+            #include "mojSetDeltaT.H"
 
             runTime++;
 
