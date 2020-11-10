@@ -31,6 +31,7 @@ Description
 
 scalar CoNum = 0.0;
 scalar meanCoNum = 0.0;
+scalar solidCoNum = 0.0;//Kristjan
 
 if (mesh.nInternalFaces())
 {
@@ -41,11 +42,14 @@ if (mesh.nInternalFaces())
 
     CoNum = 0.5*gMax(sumPhi/mesh.V().field())*runTime.deltaTValue();
 
+    solidCoNum = gMax(max(min(1e5*(solid-1e-5), 1.0), 0.0) * CoNum);//Kristjan
+
     meanCoNum =
         0.5*(gSum(sumPhi)/gSum(mesh.V().field()))*runTime.deltaTValue();
 }
 
 Info<< "Courant Number mean: " << meanCoNum
-    << " max: " << CoNum << endl;
+    << " max: " << CoNum
+    << " solid: " << solidCoNum << endl;
 
 // ************************************************************************* //
