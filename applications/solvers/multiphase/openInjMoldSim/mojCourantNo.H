@@ -40,9 +40,11 @@ if (mesh.nInternalFaces())
         fvc::surfaceSum(mag(phi))().internalField()
     );
 
+    scalarField sumPhiSol = sumPhi * max(min(1e5*(solid-1e-5), 1.0), 0.0);//Kristjan
+
     CoNum = 0.5*gMax(sumPhi/mesh.V().field())*runTime.deltaTValue();
 
-    solidCoNum = gMax(max(min(1e5*(solid-1e-5), 1.0), 0.0) * CoNum);//Kristjan
+    solidCoNum = 0.5*gMax(sumPhiSol/mesh.V().field())*runTime.deltaTValue();//Kristjan
 
     meanCoNum =
         0.5*(gSum(sumPhi)/gSum(mesh.V().field()))*runTime.deltaTValue();
