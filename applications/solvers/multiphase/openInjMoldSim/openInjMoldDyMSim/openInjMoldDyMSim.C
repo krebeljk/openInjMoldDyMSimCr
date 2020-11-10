@@ -144,10 +144,11 @@ int main(int argc, char *argv[])
 
             if (sldDictIO.headerOk())
             {
-                volScalarField sigSmStop1 = -(shrRate-shrRateLimEl)/(5e-2*shrRateLimEl);
+                sigSmStop1 = -(shrRate-shrRateLimEl)/(5e-2*shrRateLimEl);
                 sigSmStop1 = min(max(sigSmStop1 ,0.0),1.0);
-                volScalarField sigSmStop2 = (visc-viscLimEl)/(5e-2*viscLimEl);
+                sigSmStop2 = (visc-viscLimEl)/(5e-2*viscLimEl);
                 sigSmStop2 = min(max(sigSmStop2 ,0.0),1.0);
+                solid = sigSmStop1 * sigSmStop2;
 
                 fvSymmTensorMatrix elSigDevEqn(
                   fvm::ddt(elSigDev)
@@ -158,8 +159,7 @@ int main(int argc, char *argv[])
                        twoSymm(elSigDev & fvc::grad(U))
                      + shrMod * twoSymm(fvc::grad(U))
                   )
-                  * sigSmStop1
-                  * sigSmStop2
+                  * solid
                 );
                 elSigDevEqn.relax();
                 elSigDevEqn.solve();
