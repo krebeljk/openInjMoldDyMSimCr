@@ -175,6 +175,19 @@ Info<< "Reading solidification properties\n" << endl;
         sldDict.lookupOrDefault<scalar>("viscLimEl", 1e6)
     );
 
+volScalarField solid
+(
+    IOobject
+    (
+        "solid",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::NO_WRITE
+    ),
+    mesh,
+    dimensionedScalar("initSolid", dimless, 0.0)
+);
     if (sldDictIO.headerOk())
     {
         // Summarise what's been read and print in the console
@@ -188,13 +201,8 @@ Info<< "Reading solidification properties\n" << endl;
         sigSmStop1 = min(max(sigSmStop1 ,0.0),1.0);
         volScalarField sigSmStop2 = (visc-viscLimEl)/(5e-2*viscLimEl);
         sigSmStop2 = min(max(sigSmStop2 ,0.0),1.0);
-        volScalarField solid = sigSmStop1 * sigSmStop2;
+        solid = sigSmStop1 * sigSmStop2;
     }
-    else
-    {
-        volScalarField solid("solid", dimless, 1.0);
-    }
-
 
     volSymmTensorField elSigDev
     (
