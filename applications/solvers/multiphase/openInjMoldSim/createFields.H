@@ -168,9 +168,6 @@ Info<< "Reading solidification properties\n" << endl;
     dimensionedScalar shrMod("shearModulus", dimensionSet(1,-1,-2,0,0,0,0),
         sldDict.lookupOrDefault<scalar>("shearModulus", 900e6)
     );
-    dimensionedScalar shrRateLimEl("shrRateLimEl", dimensionSet(0,0,-1,0,0,0,0),
-        sldDict.lookupOrDefault<scalar>("shrRateLimEl", 1.0)
-    );
     dimensionedScalar viscLimEl("viscLimEl", dimensionSet(1,-1,-1,0,0,0,0),
         sldDict.lookupOrDefault<scalar>("viscLimEl", 1e6)
     );
@@ -193,15 +190,12 @@ volScalarField solid
         // Summarise what's been read and print in the console
         Info << nl << "Solidification properties: " << nl
              << "Shear modulus: " << shrMod << nl
-             << "Highest shear rate with elasticity: " << shrRateLimEl << nl
              << "Lowest viscosity with elasticity: " << viscLimEl << nl
              << nl << endl;
 
-        volScalarField sigSmStop1 = -(shrRate-shrRateLimEl)/(5e-2*shrRateLimEl);
+        volScalarField sigSmStop1 = (visc-viscLimEl)/(5e-2*viscLimEl);
         sigSmStop1 = min(max(sigSmStop1 ,0.0),1.0);
-        volScalarField sigSmStop2 = (visc-viscLimEl)/(5e-2*viscLimEl);
-        sigSmStop2 = min(max(sigSmStop2 ,0.0),1.0);
-        solid = sigSmStop1 * sigSmStop2;
+        solid = sigSmStop1;
     }
 
     volSymmTensorField elSigDev

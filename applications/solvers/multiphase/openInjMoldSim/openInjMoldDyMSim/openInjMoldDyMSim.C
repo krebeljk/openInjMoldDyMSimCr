@@ -144,11 +144,9 @@ int main(int argc, char *argv[])
 
             if (sldDictIO.headerOk())
             {
-                volScalarField sigSmStop1 = -(shrRate-shrRateLimEl)/(5e-2*shrRateLimEl);
+                volScalarField sigSmStop1 = (visc-viscLimEl)/(5e-2*viscLimEl);
                 sigSmStop1 = min(max(sigSmStop1 ,0.0),1.0);
-                volScalarField sigSmStop2 = (visc-viscLimEl)/(5e-2*viscLimEl);
-                sigSmStop2 = min(max(sigSmStop2 ,0.0),1.0);
-                solid = sigSmStop1 * sigSmStop2;
+                solid = sigSmStop1;
 
                 fvSymmTensorMatrix elSigDevEqn(
                   fvm::ddt(elSigDev)
