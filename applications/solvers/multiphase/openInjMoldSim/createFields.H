@@ -192,7 +192,7 @@ Info<< "Reading solidification properties\n" << endl;
     }
     else
     {
-        volScalarField solid = 1.0;
+        volScalarField solid("solid", dimless, 1.0);
     }
 
 
