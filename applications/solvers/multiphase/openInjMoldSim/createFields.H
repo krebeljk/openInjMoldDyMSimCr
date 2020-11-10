@@ -84,6 +84,21 @@ volScalarField Tc
     T - twoSevenThree
 );
 
+//kristjan - viscosity
+
+volScalarField visc
+(
+    IOobject
+    (
+        "visc",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+    ),
+    alpha1*mixture.thermo1().mu() + alpha2*mixture.thermo2().mu()
+);
+
 #include "readGravitationalAcceleration.H"
 #include "readhRef.H"
 #include "gh.H"
@@ -389,20 +404,6 @@ volScalarField mojKappaOut
     mixture.kappa()
 );
 
-//kristjan - pregled viskoznosti
-
-volScalarField visc
-(
-    IOobject
-    (
-        "visc",
-        runTime.timeName(),
-        mesh,
-        IOobject::READ_IF_PRESENT,
-        IOobject::AUTO_WRITE
-    ),
-    alpha1*mixture.thermo1().mu() + alpha2*mixture.thermo2().mu()
-);
 
 // pressure preventing material collapse bellow pMin
 volScalarField pAux
