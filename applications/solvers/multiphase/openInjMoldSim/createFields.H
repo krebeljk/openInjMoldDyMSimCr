@@ -168,6 +168,16 @@ Info<< "Reading solidification properties\n" << endl;
              << "Highest shear rate with elasticity: " << shrRateLimEl << nl
              << "Lowest viscosity with elasticity: " << viscLimEl << nl
              << nl << endl;
+
+        volScalarField sigSmStop1 = -(shrRate-shrRateLimEl)/(5e-2*shrRateLimEl);
+        sigSmStop1 = min(max(sigSmStop1 ,0.0),1.0);
+        volScalarField sigSmStop2 = (visc-viscLimEl)/(5e-2*viscLimEl);
+        sigSmStop2 = min(max(sigSmStop2 ,0.0),1.0);
+        volScalarField solid = sigSmStop1 * sigSmStop2;
+    }
+    else
+    {
+        volScalarField solid = 1.0;
     }
 
 
