@@ -156,8 +156,8 @@ int main(int argc, char *argv[])
                   dev(
                        twoSymm(elSigDev & fvc::grad(U))
                      + shrMod * twoSymm(fvc::grad(U))
+                     * solid
                   )
-                  * solid
                 );
                 elSigDevEqn.relax();
                 elSigDevEqn.solve();
