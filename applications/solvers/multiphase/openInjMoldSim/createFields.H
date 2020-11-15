@@ -129,7 +129,7 @@ volScalarField dgdt
 volScalarField dgdtw
 (
     "dgdtw",
-    dgdtw
+    dgdt
 );
 dgdtw.write();
 
