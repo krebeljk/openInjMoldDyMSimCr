@@ -180,6 +180,8 @@ int main(int argc, char *argv[])
         rho = alpha1*rho1 + alpha2*rho2;
         Tc = T - twoSevenThree;
         runTime.write();
+        dgdtw = dgdt;
+        dgdtw.write();
 
         Info<< "ExecutionTime = "
             << runTime.elapsedCpuTime()

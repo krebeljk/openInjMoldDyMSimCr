@@ -125,6 +125,14 @@ volScalarField dgdt
     pos(alpha2)*fvc::div(phi)/max(alpha2, scalar(0.0001))
 );
 
+
+volScalarField dgdtw
+(
+    "dgdtw",
+    dgdtw
+);
+dgdtw.write();
+
 // Construct interface from alpha1 distribution
 interfaceProperties interface(alpha1, U, mixture);
 
