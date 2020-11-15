@@ -122,16 +122,16 @@ surfaceScalarField rhoPhi
 
 volScalarField dgdt
 (
+    IOobject
+    (
+        "dgdt",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+    ),
     pos(alpha2)*fvc::div(phi)/max(alpha2, scalar(0.0001))
 );
-
-
-volScalarField dgdtw
-(
-    "dgdtw",
-    dgdt
-);
-dgdtw.write();
 
 // Construct interface from alpha1 distribution
 interfaceProperties interface(alpha1, U, mixture);
