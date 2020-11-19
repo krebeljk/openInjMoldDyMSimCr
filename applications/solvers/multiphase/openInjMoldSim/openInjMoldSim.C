@@ -51,9 +51,21 @@ Description
 int main(int argc, char *argv[])
 {
     Info << "openInjMoldSim v1.1.1" << endl;
+
+    argList::addOption
+    (
+        "fill",
+        "scalar",
+        "Terminate simulation when the cavity is filled to the fraction specified."
+    );
+
     #include "setRootCase.H"
     #include "createTime.H"
     #include "createMesh.H"
+
+    scalar fillEnd;
+    if(!args.optionReadIfPresent("fill", fillEnd))
+        fillEnd = 1.1;
 
     pimpleControl pimple(mesh);
 
@@ -141,7 +153,18 @@ int main(int argc, char *argv[])
         Info<< "ExecutionTime = "
             << runTime.elapsedCpuTime()
             << " s\n\n" << endl;
+
+        if(fillFrac > fillEnd)
+        {
+            Info << "Filled to "
+                 << fillFrac
+                 << " and terminating (commandline option -fill)."
+                 << endl;
+            break;
+        }
     }
+
+    runTime.writeNow();
 
     Info<< "End\n" << endl;
 
