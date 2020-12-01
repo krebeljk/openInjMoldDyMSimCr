@@ -40,7 +40,10 @@ if (mesh.nInternalFaces())
         fvc::surfaceSum(mag(phi))().internalField()
     );
 
-    scalarField sumPhiSol = sumPhi * pos(mag(elSigDev) - 1e-6 * shrMod);//Kristjan
+    scalarField sumPhiSol = sumPhi * max(//Kristjan
+            pos(mag(elSigDev) - 1e-6 * shrMod),//Developed elastic stress
+            pos(visc - 0.5 * viscLimEl )//solidifying material
+            );
 
     CoNum = 0.5*gMax(sumPhi/mesh.V().field())*runTime.deltaTValue();
 
