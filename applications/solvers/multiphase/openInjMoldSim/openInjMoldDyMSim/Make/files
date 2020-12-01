@@ -7,4 +7,4 @@
 ../mojTurbulentFluidThermoModel/mojTurbulentFluidThermoModels.C
 openInjMoldDyMSim.C
 
-EXE = $(FOAM_APPBIN)/openInjMoldDyMSimFimacBfd
+EXE = $(FOAM_APPBIN)/openInjMoldDyMSimFimacBfe
