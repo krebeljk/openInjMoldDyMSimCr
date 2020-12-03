@@ -118,10 +118,13 @@ int main(int argc, char *argv[])
                 fvSymmTensorMatrix elSigDevEqn(
                   fvm::ddt(elSigDev)
                 + fvm::div(phi,elSigDev)
+                + fvm::SuSp(-fvc::div(phi),elSigDev)
+                - twoSymm(elSigDev & fvc::grad(U))
                   ==
-                  twoSymm(elSigDev & fvc::grad(U))
-                + shrMod * dev(twoSymm(fvc::grad(U)))
-                  * solid
+                  dev(
+                       shrMod * twoSymm(fvc::grad(U))
+                     * solid
+                  )
                 );
                 elSigDevEqn.relax();
                 elSigDevEqn.solve();

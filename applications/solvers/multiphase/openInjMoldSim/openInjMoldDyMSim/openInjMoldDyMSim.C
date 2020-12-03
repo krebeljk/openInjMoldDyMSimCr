@@ -163,10 +163,10 @@ int main(int argc, char *argv[])
                   fvm::ddt(elSigDev)
                 + fvm::div(phi,elSigDev)
                 + fvm::SuSp(-fvc::div(phi),elSigDev)
+                - twoSymm(elSigDev & fvc::grad(U))
                   ==
                   dev(
-                       twoSymm(elSigDev & fvc::grad(U))
-                     + shrMod * twoSymm(fvc::grad(U))
+                       shrMod * twoSymm(fvc::grad(U))
                      * solid
                   )
                 );
