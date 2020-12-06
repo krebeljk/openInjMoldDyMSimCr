@@ -1,45 +1,26 @@
-# openInjMoldSim [`v1.1`](VERSION.md)
+# openInjMoldDyMSimCr v1.0
 
-This is an OpenFOAM-3.0.1 solver for simulation of injection molding filling, packing and cooling stages. It is a
-modification of the compressibleInterFoam solver distributed with OpenFOAM. The solver has so far been used on the small
-2D demo case for amorphous polystyrene. A simulation of (semi-crystalline) HDPE is under development. Currently,
-the simulation is prohibitively inconvenient for typical industrial use.
-
-See the official website [openfoam.org](https://openfoam.org/), unofficial wiki
-[openfoamwiki.net](https://openfoamwiki.net/index.php/Main_Page) and the community forum
-[cfd-online.com](https://www.cfd-online.com/Forums/openfoam/).
-
-## Getting Started
-
-An OpenFOAM 3.0.1 installation is required to run the code. This code was run on Linux Ubuntu 14.04 LTS and Centos 6.6 (Rocks 6.2 Sidewinder).
-
-Run `Allwmake` in the solver directory to compile the solver.
-
-Run `AllRun` in the [`fill_pack`](/tutorials/demo/fill_pack) directory to run the example simulation. Then run `paraFoam` in the case directory to view the results.
+This is a fork of [openInjMoldSim](https://github.com/krebeljk/openInjMoldSim) that implements the Kolmogorof-Avrami-Evans model of crystallization as Schenider's equations.
+The material data provided with the case approximate HDPE behavior on cooling and compare the packing pressure evolution.
 
 ## Functionality
+* The dynamic mesh functionality is used to model mold deformation.
+* Pressure dependence of the thermal heat coefficient is modeled with a custom boundary condition.
+* The thermal conductivity depends on pressure and crystallinity.
+* Specific heat and latent heat are provided as separate temperature dependent tables.
+* Latent heat is released according to relative crystallinity progress.
+* Elastic deviatoric stress is developed in the solid phase.
 
-* Compressible, non-isothermal, laminar cavity flow.
-* Tait equation of state.
-* Cross-WLF viscosity model.
-
-## Feedback
-
-Any feedback is apreciated - krebeljk()gmail.com.
-
-## Authors
-
-* **Kristjan Krebelj** - Assembled and tested the code. Maintainer of the repository.
-* **Janez Turk** - Introduced the key modifications to the original OpenFOAM library.
-
-## License
-
-This project is licensed under the GPU License - see the [LICENSE.md](LICENSE.md) file for details.
+## Contact
+krebeljk()gmail.com
 
 ## Acknowledgments
 
 * The work was supported by the [Laboratory for Numerical Modelling and Simulation - LNMS](http://lab.fs.uni-lj.si/lnms/).
 
-## Demo case
-![Demo geometry](/tutorials/demo/demo_geom.png)
-![Pressure evolution](/tutorials/demo/plot.png)
+### Special thanks
+* **Janez Turk** - Introduced the key modifications to the original OpenFOAM library.
+
+## License
+
+This project is licensed under the GPU License - see the [LICENSE.md](LICENSE.md) file for details.
