@@ -178,7 +178,10 @@ Info<< "Reading solidification properties\n" << endl;
         sldDict.lookupOrDefault<scalar>("shearModulus", 900e6)
     );
     dimensionedScalar viscLimEl("viscLimEl", dimensionSet(1,-1,-1,0,0,0,0),
-        sldDict.lookupOrDefault<scalar>("viscLimEl", 1e6)
+        sldDict.lookupOrDefault<scalar>("viscLimEl", 1e9)
+    );
+    dimensionedScalar viscLimSolidCo("viscLimSolidCo", dimensionSet(1,-1,-1,0,0,0,0),
+        sldDict.lookupOrDefault<scalar>("viscLimSolidCo", 0.5*viscLimEl.value())
     );
 
 volScalarField solid
@@ -200,6 +203,7 @@ volScalarField solid
         Info << nl << "Solidification properties: " << nl
              << "Shear modulus: " << shrMod << nl
              << "Lowest viscosity with elasticity: " << viscLimEl << nl
+             << "maxCoSolid check at viscosity above: " << viscLimSolidCo << nl
              << nl << endl;
 
         volScalarField sigSmStop1 = (visc-viscLimEl)/(5e-2*viscLimEl);

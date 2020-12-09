@@ -42,7 +42,7 @@ if (mesh.nInternalFaces())
 
     scalarField sumPhiSol = sumPhi * max(//Kristjan
             pos(mag(elSigDev) - 1e-6 * shrMod),//Developed elastic stress
-            pos(visc - 0.1 * viscLimEl )//solidifying material
+            pos(visc - viscLimSolidCo)//solidifying material
             );
 
     CoNum = 0.5*gMax(sumPhi/mesh.V().field())*runTime.deltaTValue();
