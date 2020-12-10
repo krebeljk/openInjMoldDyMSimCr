@@ -1,0 +1,80 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  3.0.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      thermophysicalProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+thermoType
+{
+    type            mojCrHeRhoThermo;
+    mixture         pureMixture;
+    transport       crossWLFCr;
+    thermo          hTabularCr;//hPolynomial;
+    equationOfState taitCr;
+    specie          specie;
+    energy          sensibleInternalEnergy;
+}
+
+mixture
+{
+    specie
+    {
+        nMoles      1;
+        molWeight   18.0;
+    }
+    equationOfState
+    {
+        b1m         0.001274;
+        b2m         1.026e-6;
+        b3m         9.263e7;
+        b4m         0.004941;
+        b1s         0.001075;
+        b2s         2.077e-7;
+        b3s         3.324e8;
+        b4s         2.46e-6;
+        b5          414.15;
+        b6          1.543e-7;
+        b10         50.0;//K
+    }
+    thermodynamics
+    {
+        Hf              0;
+        Sf              0;
+        //CpCoeffs<8>     (-3.01067e6  53099.2  -395.962  1.61913  -0.00392213  5.63118e-6  -4.43963e-9 1.48364e-12);//J/(kgK)
+    }
+    transport //HDPE Sabic
+    {
+        n          0.393539;//1
+        Tau        64568.9;//Pa
+        D1         3.76174e15;//Pa s
+        D2         153.15;//K
+        D3         $..equationOfState.b6;//K/Pa
+        A1         33.21;//1
+        A2         51.6;//K
+        //lambda     0.22;//W/(mK) toplotna prevodnost PS - glej Dawson pressure, temperature dependence
+        etaMin     5;//Pas
+        etaMax     500e3;//Pas
+        TnoFlow    333.15;//K
+        deltaTempInterp 10.0;//K
+        // Titomanlio 1997 viscosity in crystallization: eta(cr) = etaMelt * (1 + F exp(-H/(cr crUlt)^M))
+        crF 1e3;
+        crH 0.2;
+        crM 2.0;
+        crUlt 0.66; // ultimate crystallinity - independent entry from solidificationProperties dict
+                    // Note that the specific heat table should also be assuming the same value.
+    }
+}
+
+
+// ************************************************************************* //

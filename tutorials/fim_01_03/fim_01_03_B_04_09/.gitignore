@@ -1,0 +1,28 @@
+# git-ls-files --others --exclude-from=.git/info/exclude
+# Lines that start with '#' are comments.
+*.gz
+log.*
+postProcessing
+dynamicCode
+*~
+processor*
+[0-9]*
+[0-9]*.[0-9]*
+!0.org
+#constant/extendedFeatureEdgeMesh
+*.eMesh
+constant/polyMesh/*
+!constant/polyMesh/blockMeshDict
+#constant/cellToRegion
+*.OpenFOAM
+# kristjan
+*stdout.txt
+system/controlDict
+system/fvSolution
+*.png
+nohup.out
+*.foam
+hide_*
+tt_pts_dy.txt
+# end-of-file
+

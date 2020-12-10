@@ -1,0 +1,31 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  3.0.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      crystPropDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+
+// final absolute crystallinity
+ultCryst    0.66; // if this is changed cpTableCr must be regenerated for the new value
+// the solver uses relative crystallinity
+
+a 1.543e-7; //K/Pa ... solidification dependence on pressure (b6 in Tait)
+
+Gretard 2; // G(T, cr) = G(T) exp(-Gretard zuCr) ... reduction of crystallization rate
+
+delT0 2.5; //K ... unit of exponential increase in nucleation with quasi-subcooling //Skg_03_05_E_07
+
+N0 1e8; //1 heterogeneous nucleation  N = N0 exp((Tm-T)/delT0) //Skg_03_05_E_07
+
+// ************************************************************************* //
