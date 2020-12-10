@@ -3,6 +3,8 @@
 This is a fork of [openInjMoldSim](https://github.com/krebeljk/openInjMoldSim) that implements the Kolmogorof-Avrami-Evans model of crystallization as Schenider's equations.
 The material data provided with the case approximate HDPE behavior on cooling and compare the packing pressure evolution.
 
+See the [jupyter notebook](tutorials/fim_01_03.ipynb) for the through-thickness plots.
+
 ## Functionality
 * The dynamic mesh functionality is used to model mold deformation.
 * Pressure dependence of the thermal heat coefficient is modeled with a custom boundary condition [externalWallHeatFluxTemperatureP](https://github.com/krebeljk/externalWallHeatFluxTemperatureP) (DOI:10.5281/zenodo.4308349).
