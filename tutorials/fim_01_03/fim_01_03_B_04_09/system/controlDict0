@@ -15,7 +15,7 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-application     openInjMoldDyMSimFimacBfh;
+application     openInjMoldDyMSimCr;
 
 startFrom       latestTime;
 
