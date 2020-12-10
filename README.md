@@ -1,5 +1,7 @@
 # openInjMoldDyMSimCr v1.0
 
+[![DOI](https://zenodo.org/badge/320235816.svg)](https://zenodo.org/badge/latestdoi/320235816)
+
 This is a fork of [openInjMoldSim](https://github.com/krebeljk/openInjMoldSim) that implements the Kolmogorof-Avrami-Evans model of crystallization as Schenider's equations.
 The material data provided with the case approximate HDPE behavior on cooling and compare the packing pressure evolution.
 
