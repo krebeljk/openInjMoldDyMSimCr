@@ -13,6 +13,8 @@ See the [jupyter notebook](tutorials/fim_01_03.ipynb) for the through-thickness 
 * Latent heat is released according to relative crystallinity progress.
 * Elastic deviatoric stress is developed in the solid phase.
 
+![animation](anim.gif)
+
 ## Contact
 krebeljk()gmail.com
 
