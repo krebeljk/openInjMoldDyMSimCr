@@ -5,7 +5,7 @@ The material data provided with the case approximate HDPE behavior on cooling an
 
 ## Functionality
 * The dynamic mesh functionality is used to model mold deformation.
-* Pressure dependence of the thermal heat coefficient is modeled with a custom boundary condition.
+* Pressure dependence of the thermal heat coefficient is modeled with a custom boundary condition [externalWallHeatFluxTemperatureP](https://github.com/krebeljk/externalWallHeatFluxTemperatureP) (DOI:10.5281/zenodo.4308349).
 * The thermal conductivity depends on pressure and crystallinity.
 * Specific heat and latent heat are provided as separate temperature dependent tables.
 * Latent heat is released according to relative crystallinity progress.
